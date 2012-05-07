@@ -1,0 +1,54 @@
+rails 2.2.3
+
+create new project
+$ rails blog (or ralis blog -d postgresql)
+
+configuring a database
+$ cd blog
+$ vi config/database.yml
+
+install postgresql
+$ sudo apt-get install postgresql
+$ sudo passwd postgres
+(develop)
+$ su postgres
+$ psql
+
+install postgresql adapter (activerecord-postgresql-adapter)
+$ sudo apt-get install libpqxx-dev (c++ library to connect to postgresql)
+$ sudo gem install pg
+
+switch user of database.yml 
+
+$ rake db:create
+
+connect database
+$ psql database_name
+database_name=# \db
+database_name=# \d
+
+start server
+$ ruby script/server (need user of database.yml)
+
+say "hello"
+$ ruby script/generate controller home index
+
+set app home
+$ mv public/index.html public/index.hml.bak
+$ vi config/routes.rb
+
+quickly with scaffolding
+$ ruby script/generate scaffold Post name:string title:string content:text
+
+$ rake db:migrate
+
+add validation (diff rails 3)
+$ vi app/models/post.rb
+
+use console
+$ ruby script/console (need user)
+Post.create (ralis Post.new)
+
+list all posts
+
+

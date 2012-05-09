@@ -15,3 +15,15 @@ config.action_controller.perform_caching             = false
 
 # Don't care if the mailer can't send
 config.action_mailer.raise_delivery_errors = false
+
+# debug config
+#config.breakpoint_server = true
+#require "ruby-debug"
+
+# logger
+#Rails.logger = Logger.new(STDOUT)
+#Rails.logger = Log4r::Logger.new("Development Log")
+
+#config.logger = Logger.new(STDOUT)
+#config.logger = Log4r::Logger.new("Application Log")
+#config.log_level = :warn

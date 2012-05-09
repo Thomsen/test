@@ -1,4 +1,8 @@
 class PostsController < ApplicationController
+
+  before_filter :find_post,
+    :only => [:show, :edit, :update, :destroy]
+
   # GET /posts
   # GET /posts.xml
   def index
@@ -13,7 +17,7 @@ class PostsController < ApplicationController
   # GET /posts/1
   # GET /posts/1.xml
   def show
-    @post = Post.find(params[:id])
+    #@post = Post.find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -24,6 +28,10 @@ class PostsController < ApplicationController
   # GET /posts/new
   # GET /posts/new.xml
   def new
+    
+    # ruby-debug 
+    debugger
+    
     @post = Post.new
 
     respond_to do |format|
@@ -34,13 +42,19 @@ class PostsController < ApplicationController
 
   # GET /posts/1/edit
   def edit
-    @post = Post.find(params[:id])
+    #@post = Post.find(params[:id])
   end
 
   # POST /posts
   # POST /posts.xml
   def create
     @post = Post.new(params[:post])
+
+    # logger send message
+    logger.debug "New post: #{@post.attributes.inspect}"
+    logger.debug "Post should be vaild: #{@post.valid?}" 
+    #logger.info
+    #logger.fatal
 
     respond_to do |format|
       if @post.save
@@ -57,7 +71,7 @@ class PostsController < ApplicationController
   # PUT /posts/1
   # PUT /posts/1.xml
   def update
-    @post = Post.find(params[:id])
+    #@post = Post.find(params[:id])
 
     respond_to do |format|
       if @post.update_attributes(params[:post])
@@ -74,12 +88,17 @@ class PostsController < ApplicationController
   # DELETE /posts/1
   # DELETE /posts/1.xml
   def destroy
-    @post = Post.find(params[:id])
+    #@post = Post.find(params[:id])
     @post.destroy
 
     respond_to do |format|
       format.html { redirect_to(posts_url) }
       format.xml  { head :ok }
     end
+  end
+
+  private 
+  def find_post
+    @post = Post.find(params[:id])
   end
 end

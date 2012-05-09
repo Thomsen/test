@@ -51,4 +51,35 @@ Post.create (ralis Post.new)
 
 list all posts
 
+debug
+$ vi app/views/posts/show.html.erb
 
+ruby-debug
+$ gem install ruby-debug 
+$ vi config/environments/development.rb (not need --debugger)
+$ vi app/controller/posts_controller.rb
+$ ruby script/server --debugger
+you can rdb in console
+(rdb ) help 
+
+logger
+$ vi config/environment.rb (or environment file, common up)
+$ vi app/controllers/posts_controller.rb (sending messages)
+look the log/environment_name.log (message)
+
+debugging memory leaks
+$ gem install break_house
+$ vi config/environment.rb
+$ RAILS_ENV=production BLEAK_HOUSE=1 ruby-bleak-house script/server
+
+add a second model
+:! script/generate model Comment commenter:string body:text post:references (in vim)
+:! rake db:migrate (but need postgres user)
+edit post.rb
+edit config/routes.rb
+generate controller 
+code
+
+use partials to eliminate view
+add app/views/posts/_form_.html.erb
+modify app/views/posts/

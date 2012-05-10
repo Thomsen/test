@@ -78,6 +78,22 @@ result.each {
 }
 
 ## insertion
+puts "insertion"
+insertion = [3, 23, 22, 34]
+
+insertion.each_with_index do |ins, i|
+    j = i -1
+    while j >= 0
+        break if insertion[j] <= ins
+        insertion[j+1] = insertion[j]
+        j -= 1
+    end
+    insertion[j+1] = ins
+end
+
+insertion.each do |i|
+    puts i
+end
 
 ## hanoi
 

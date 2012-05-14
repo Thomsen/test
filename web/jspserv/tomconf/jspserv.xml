@@ -1,0 +1,5 @@
+<Context path="/jspserv" 
+    docBase="/home/thom/test/web/jspserv"
+    reloadable="false"
+    debug="0"
+	antiResourceLocking="false" />

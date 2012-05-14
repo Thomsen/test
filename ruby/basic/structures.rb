@@ -142,4 +142,13 @@ print "\n"
   
 #yeild placeholder
  
+puts ''
   
+[1,2,3].each do |i|
+    while i<3
+        break if i>1
+        puts "while inner " + i.to_s
+        i += 1
+    end
+    puts "each inner " + i.to_s
+end

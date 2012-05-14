@@ -1,5 +1,4 @@
 ## bubble
-
 puts 'bubble'
 bubble = [3, 2, 4, 32, 24, 21]
 
@@ -81,14 +80,17 @@ result.each {
 puts "insertion"
 insertion = [3, 23, 22, 34]
 
+# [7, 8, 6] [5, 8, 8] [5, 7, 6] [5, 7, 8]
+# [7, 8, 9, 6] [7, 8, 9, 9] [7, 8, 8, 9] [7, 7, 8, 9] [6, 7, 8, 9]
+
 insertion.each_with_index do |ins, i|
-    j = i -1
-    while j >= 0
-        break if insertion[j] <= ins
-        insertion[j+1] = insertion[j]
-        j -= 1
+    j = i-1    # 22 2
+    while j >= 0  # 22 1
+        break if insertion[j] <= ins  # exec insertion[j+1] = ins, outter while
+        insertion[j+1] = insertion[j] # [2] = 23
+        j -= 1 # while j=0 break
     end
-    insertion[j+1] = ins
+    insertion[j+1] = ins # [1] = 22
 end
 
 insertion.each do |i|
@@ -96,7 +98,6 @@ insertion.each do |i|
 end
 
 ## hanoi
-
 puts "hanoi"
 def move(from, to)
     puts "#{from} move to #{to}"
@@ -111,7 +112,8 @@ def hanoi(n, first, second, third)
         hanoi(n-1, second, first, third)
     end
 end
-hanoi(3, "A", "B", "C") # A move to C of n
+puts 3.to_s + " hanoi"
+hanoi(4, "A", "B", "C") # A move to C of n
 
 def nextloc(current, n)
     case current
@@ -129,7 +131,12 @@ end
 puts nextloc('A', 1)
 
 def hanoi(n)
-    
+    # n is odd, ACB (A-C,A-B C-B A-C B-A,B-C A-C)
+    # ACB (A-C,A-B, C-B A-C B-A,B-C A-C,A-B C-B,C-A B-A...) 
+
+
+    # n is even, ABC (A-B,A-C B-C A-B C-A,C-B A-B,A-C B-C,B-A C-A B-C A-B A-C,A-C B-C)
+
 end
 
 ## shell

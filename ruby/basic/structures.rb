@@ -152,3 +152,5 @@ puts ''
     end
     puts "each inner " + i.to_s
 end
+
+5.times { |x| puts "times " + x.to_s }

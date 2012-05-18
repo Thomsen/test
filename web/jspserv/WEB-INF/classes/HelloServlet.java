@@ -20,16 +20,18 @@ public class HelloServlet extends HttpServlet {
 
         pw.println("<p>test 4 response status code</p>");
 
-        String searchString = URLEncoder.encode(request.getParameter("searchString"));
-        String searchEngine = request.getParameter("searchEngine");
-        String numResults = request.getParameter("numResults");
+        if (request.getParameter("searchString") != null) {
+            String searchString = URLEncoder.encode(request.getParameter("searchString"));
+            String searchEngine = request.getParameter("searchEngine");
+            String numResults = request.getParameter("numResults");
 
-        if ("google".equals(searchEngine)) {
-            String url = response.encodeURL("http://www.google.com.hk/search?q=" + searchString + "&num=" + numResults);
-            response.sendRedirect(url);
-            return ;
+            if ("google".equals(searchEngine)) {
+                String url = response.encodeURL("http://www.google.com.hk/search?q=" + searchString + "&num=" + numResults);
+                response.sendRedirect(url);
+                return ;
+            }
+            response.sendError(response.SC_NOT_FOUND, "no search engine");
         }
-        response.sendError(response.SC_NOT_FOUND, "no search engine");
 
         // response header
         response.setHeader("Refresh", "5");

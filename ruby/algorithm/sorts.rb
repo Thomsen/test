@@ -140,18 +140,200 @@ def hanoi(n)
 end
 
 ## shell
+puts 'shell'
+shell = [32, 12, 23]
+len = shell.size
+while (len > 1) 
+    len = len / 2
+    (len..shell.size-1).each do |i|
+        j = i
+        while (j>0)
+            shell[j], shell[j-len] = shell[j-len], shell[j] if shell[j] <= shell[j-len]
+        j = j - len
+        end
+    end
+end
+
+shell.each do |i|
+    puts i.to_s
+end
 
 ## merge
+puts 'merge'
+
+def merge(l, r)
+    result = []
+    while l.size > 0 and r.size > 0 do
+        if l.first < r.first
+            result << l.shift
+        else
+            result << r.shift
+        end
+    end
+    if l.size > 0
+        result += l
+    end
+    if r.size > 0
+        result += r
+    end
+    return result
+end
+
+def merge_sort(arr)
+    return arr if arr.size <= 1
+    middle = arr.size / 2
+    left = merge_sort(arr[0, middle])
+    right = merge_sort(arr[middle, arr.size-middle])
+    merge(left, right)
+end
+
+merge_value = [23, 234, 21]
+new_value = merge_sort(merge_value)
+(merge_value.length).times do |i|
+    puts merge_value[i]
+end
+0.upto(new_value.length-1) do |i|
+    puts new_value[i]
+end
+
 
 ## heap
+puts 'heap'
+def heapify(arr, idx, size)
+    left_idx = 2 * idx + 1
+    right_idx = 2 * idx + 2
+    bigger_idx = idx
+    bigger_idx = left_idx if left_idx < size && arr[left_idx] > arr[idx]
+    bigger_idx = right_idx if right_idx < size && arr[right_idx] > arr[bigger_idx]
+    if bigger_idx != idx
+        arr[idx], arr[bigger_idx] = arr[bigger_idx], arr[idx]
+        heapify(arr, bigger_idx, size)
+    end
+end
+
+def build_heap(arr)
+    last_parent_idx = arr.length / 2 -1
+    i = last_parent_idx
+    while i >= 0
+        heapify(arr, i, arr.size)
+        i = i - 1
+    end
+end
+
+def heap_sort(arr)
+    return arr if arr.size <= 1
+    size = arr.size
+    build_heap(arr)
+    while size > 0
+        arr[0], arr[size-1] = arr[size-1], arr[0]
+        size = size -1
+        heapify(arr, 0, size)
+    end
+    return arr
+end
+
+heap = [ 2, 23, 12]
+result = heap_sort(heap)
+result.each do |i|
+    puts i
+end
+
 
 ## quick
+puts 'quick'
+def quick_sort(arr)
+    (x = arr.pop) ? quick_sort(arr.select{|i| i<= x}) + [x] + quick_sort(arr.select{|i| i>x}) : []
+end
+
+quick = [33, 26, 23]
+result = quick_sort(quick)
+result.each do |i|
+    puts i
+end
+
 
 ## counting
+puts 'counting'
+def counting_sort(arr)
+    min = arr.min
+    max = arr.max
+    counts = Array.new(max-min+1, 0)
+    
+    arr.each do |a|
+        counts[a-min] += 1
+    end
+
+    (0...counts.size).map{|i| [i+min]*counts[i]}.flatten
+end
+
+counting = [2, 5, 2]
+result = counting_sort(counting)
+result.each do |i|
+    puts i
+end
 
 ## radix
+puts 'radix'
+def kth_digit(n, i)
+    while (i>1)
+        n = n / 10
+        i = i - 1
+    end
+    n % 10
+end
+
+def radix_sort(arr)
+    max = arr.max
+    d = Math.log10(max).floor + 1
+
+    (1..d).each do |i|
+        tmp = []
+        (0..9).each do |j|
+            tmp[j] = []
+        end
+
+        arr.each do |a|
+            kth = kth_digit(a, i)
+            tmp[kth] << a
+        end
+        arr = tmp.flatten
+    end
+    return arr
+end
+
+radix = [22, 21, 23]
+result = radix_sort(radix)
+result.each do |i|
+    puts i
+end
+
 
 ## bucket
+puts 'bucket'
+def first_number(n)
+    (n*10).to_i
+end
+
+def bucket_sort(arr)
+    tmp = []
+    (0..9).each do |j|
+        tmp[j] = []
+    end
+
+    arr.each do |a|
+        k = first_number(a)
+        tmp[k] << a
+    end
+
+    (0..9).each do |j|
+        tmp[j] = quick_sort(tmp[j])
+    end
+
+    tmp.flatten
+end
+
+bucket = [0.63, 0.13, 0.44]
+p bucket_sort(bucket)
 
 ## cocktail
 

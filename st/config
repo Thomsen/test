@@ -1,0 +1,4 @@
+$ sudo apt-get install gnu-smalltalk
+$ gst helloworld.st
+
+$ gst -q (interactive)

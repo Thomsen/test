@@ -1,0 +1,2 @@
+$ sudo apt-get install sbcl
+$ sbcl --script helloworld.lisp

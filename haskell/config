@@ -1,0 +1,14 @@
+$ sudo apt-get install ghc6
+(emacs mode
+$ sudo apt-cache policy haskell-mode
+$ sudo apt-get install haskell-mode
+add /etc/apt/sources.list
+deb http://apt2.freespire.org/CNRUbuntu skipjack-feisty main
+$ sudo apt-get update
+)
+
+$ sudo add-apt-repository ppa:justinbogner/haskell-platform
+$ sudo apt-get update
+$ sudo apt-get install haskell-platform
+
+$ ghc helloworld.hs -o helloworld

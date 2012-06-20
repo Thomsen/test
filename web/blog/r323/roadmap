@@ -1,0 +1,22 @@
+rails 3.2.3
+
+$ rails new r323
+$ rails server
+fix error
+$ gem install execjs
+$ gem install therubyracer
+download node.js source
+configure to make install
+
+config user fro postgresql
+$ adduser thom
+$ psswd thom
+$ su - postgres(develop)
+$ psql tempplate1 (or psql -d template1 -u postgres)
+- create user thom with password 'pass';
+- create database demodb
+- grant all privileges on database demodb to thom;
+(or createuser createdb command)
+
+
+

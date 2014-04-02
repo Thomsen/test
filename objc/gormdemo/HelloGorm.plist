@@ -1,0 +1,11 @@
+{
+  ApplicationDescription = "Hello Window Tutorial";
+  ApplicationIcon = "";
+  ApplicationName = HelloWindow;
+  ApplicationRelease = 0.1;
+  Authors = "";
+  Copyright = "Copyright (C) 2013 by Anyuaning";
+  CopyrightDescription = "Released under ...";
+  FulVersionID = 0.1;
+  URL = "";
+}

@@ -1,4 +1,0 @@
-#sudo apt-get install gnustep gobjc gnustep-devel
-#
-#vim /usr/include/GNUstep/GNUstepBase/GSConfig.h
-# edit 221

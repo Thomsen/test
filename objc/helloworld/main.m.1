@@ -1,0 +1,32 @@
+#include <Foundation/NSObject.h>
+#include <Foundation/NSString.h>
+@interface Say: NSObject
+{
+}
+
+-(void) sayHello;
+-(void) sayHelloTo: (NSString *) name;
+@end
+
+@implementation Say
+-(void) sayHello
+{
+  NSLog(@"Hello World");
+}
+
+-(void) sayHelloTo: (NSString *) name
+{
+  NSLog(@"Hello World, %@", name);
+}
+@end
+
+#include <Foundation/Foundation.h>
+int main(int argc, char*argv[]) {
+  NSAutoreleasePool *pool;
+  Say *person = [[Say alloc] init];
+  [person sayHello];
+  [person sayHelloTo: @"Thomsen"];
+  [person release];
+  [pool release];
+  return 0;
+}

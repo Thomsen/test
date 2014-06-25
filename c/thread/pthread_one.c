@@ -4,7 +4,7 @@
 
 void *print_message(void *ptr);
 
-main()
+pthread_one_test()
 {
   pthread_t thread1, thread2;
   const char *message1 = "Thread 1";

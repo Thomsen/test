@@ -34,6 +34,7 @@ end
 end
 
 # regular
+puts 'regular'
 (bubble.length..1).each do |i|
     (0..i-1).each do |j|
         if bubble[j].to_i > bubble[j+1].to_i
@@ -42,7 +43,7 @@ end
     end
 end
 
-for i in 0..bubble.length do # should bubble.length-1 
+for i in 0..bubble.length do # should bubble.length-1
     puts bubble[i]
 end
 
@@ -117,11 +118,11 @@ hanoi(4, "A", "B", "C") # A move to C of n
 
 def nextloc(current, n)
     case current
-    when 'A':
+    when 'A' then
         return (n%2==0) ? 'C' : 'B'
-    when 'B':
+    when 'B' then
         return (n%2==0) ? 'A' : 'C'
-    when 'C':
+    when 'C' then
         return (n%2==0) ? 'B' : 'A'
     else
         return 0
@@ -132,7 +133,7 @@ puts nextloc('A', 1)
 
 def hanoi(n)
     # n is odd, ACB (A-C,A-B C-B A-C B-A,B-C A-C)
-    # ACB (A-C,A-B, C-B A-C B-A,B-C A-C,A-B C-B,C-A B-A...) 
+    # ACB (A-C,A-B, C-B A-C B-A,B-C A-C,A-B C-B,C-A B-A...)
 
 
     # n is even, ABC (A-B,A-C B-C A-B C-A,C-B A-B,A-C B-C,B-A C-A B-C A-B A-C,A-C B-C)
@@ -143,7 +144,7 @@ end
 puts 'shell'
 shell = [32, 12, 23]
 len = shell.size
-while (len > 1) 
+while (len > 1)
     len = len / 2
     (len..shell.size-1).each do |i|
         j = i
@@ -258,7 +259,7 @@ def counting_sort(arr)
     min = arr.min
     max = arr.max
     counts = Array.new(max-min+1, 0)
-    
+
     arr.each do |a|
         counts[a-min] += 1
     end

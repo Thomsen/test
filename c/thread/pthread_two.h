@@ -14,5 +14,6 @@ struct params
 } param[THREAD_SIZE];
 
 int *add(struct params *p);
+int *sub(struct params *p);
 
 #endif /* __PTHREAD_TWO_H */

@@ -198,7 +198,7 @@ end
 end
 
 
-## heap
+## heap (1000000 CV sorted by age)
 puts 'heap'
 def heapify(arr, idx, size)
     left_idx = 2 * idx + 1

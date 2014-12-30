@@ -1,0 +1,10 @@
+GEM
+  remote: http://ruby.taobao.org/
+  specs:
+    ruby_protobuf (0.4.11)
+
+PLATFORMS
+  x64-mingw32
+
+DEPENDENCIES
+  ruby_protobuf

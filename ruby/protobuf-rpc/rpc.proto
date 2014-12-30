@@ -1,0 +1,22 @@
+package rpcser;
+
+message SearchRequest
+{
+  required string keyword = 1;
+}
+
+message SearchResponse
+{
+  required string result = 1;
+}
+
+service RpcService
+{
+  rpc search (SearchRequest) returns (SearchResponse);
+}
+
+// rprotoc rpc.proto
+// ./rpc.pb.rb
+// ./start_rpc_service
+// ./rpc_service.rb
+// ./client_search.rb

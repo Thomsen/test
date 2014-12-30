@@ -1,0 +1,4 @@
+source 'http://ruby.taobao.org'
+
+# ruby protobuf
+gem 'ruby_protobuf'

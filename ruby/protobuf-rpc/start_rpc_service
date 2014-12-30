@@ -1,0 +1,6 @@
+$LOAD_PATH << '.'
+
+#!/usr/bin/env ruby
+require 'rpc_service'
+
+Rpcser::RpcService.new(:Port => 9999).start

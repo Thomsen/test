@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html ng-app>
+  <head>
+    <title>
+      MVVM
+    </title>
+    <script type="text/javascript" src="angular.min.js">
+    </script>
+  </head>
+  <body>
+    <!-- View -->
+    <form ng-controller="DivisionController">
+      <label>
+        Number:
+      </label>
+      <input name="number" ng-change="divisionNeeded()" ng-model="data.number" /> <br />
+      <label>
+        Number enterred by user:
+      </label>
+      {{data.number}} <br />
+      <label>
+        Divisor:
+      </label>
+      <input name="divisor" ng-change="divisionNeeded()" ng-model="data.divisor" /> <br />
+      <label>
+        Divisor enterred by user:
+      </label>
+      {{data.divisor}} <br />
+      <label>
+        Result:
+      </label>
+      {{data.result}} <br />
+   </form>
+  </body>
+  <script>
+    function DivisionController($scope) {
+      // Model
+      $scope.data = {number: 0, divisor: 1, result: 0};
+
+      // ViewModel
+      $scope.divisionNeeded = function() {
+         $scope.data.result = $scope.data.number / $scope.data.divisor;
+      }
+    }
+  </script>
+</html>

@@ -1,0 +1,22 @@
+<h1>Comments#index</h1>
+<p>Find me in app/views/comments/index.html.erb</p>
+
+<table>
+<tr>
+  <th>Commenter</th>
+  <th>Body</th>
+</tr>
+<% for comment in @comments %>
+  <tr>
+    <td><%=h comment.commenter %></td>
+    <td><%= link_to 'Show', article_comment_path(@post, comment) %></td>
+    <td>
+      <%= link_to 'Destory', article_comment_path(@post, comment),
+          :confirm => 'Are you sure?', :method => :delete %>
+    </td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+<%= link_to 'New comment', new_article_comment_path(@post) %>

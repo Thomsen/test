@@ -9,7 +9,7 @@ exports.circumference = function(r) {
 };
 
 
-// exports is quote of module.exports
+// exports is a reference of module.exports
 // can modify or add attribute
 // cann't assignment value
 

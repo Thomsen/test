@@ -14,3 +14,6 @@ clean:
 	rm calc.tab.h
 	rm calc.tab.c
 	rm calc
+
+# -lfl link libfl.a
+# fedora yum install flex flex-devel

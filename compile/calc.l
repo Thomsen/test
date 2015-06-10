@@ -9,12 +9,12 @@ YYSTYPE yylval;
 %%
 
 "+"                                { return ADD; }
-"-"                                { return ADD; }
-"*"                                { return ADD; }
-"/"                                { return ADD; }
-"("                                { return ADD; }
-")"                                { return ADD; }
-"|"                                { return ADD; }
+"-"                                { return SUB; }
+"*"                                { return MUL; }
+"/"                                { return DIV; }
+"("                                { return ABS; }
+")"                                { return OP; }
+"|"                                { return CP; }
 \n                                 { return EOL; }
 [ t]                               { /* ignore */ }
 ([0-9]*\.?[0-9]+|[0-9]+\.[0-9]*)  { yylval = atof(yytext); return NUMBER; }

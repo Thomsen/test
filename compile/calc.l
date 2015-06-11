@@ -1,3 +1,4 @@
+// definitions
 %{
 #define YYSTYPE double
 #include "calc.tab.h"
@@ -8,6 +9,7 @@ YYSTYPE yylval;
 
 %%
 
+// rules
 "+"                                { return ADD; }
 "-"                                { return SUB; }
 "*"                                { return MUL; }
@@ -21,19 +23,20 @@ YYSTYPE yylval;
 
 %%
 
+// user code
 #ifdef CALC_LEX
 int main (int argc, char **argv)
 {
-int token;
-while (token == yylex())
-{
-printf("%d", token);
-if (token == NUMBER) {
-printf(" = %f\n", yylval);
-} else {
-printf("\n");
-}
-}
-return 0;
+  int token;
+  while (token == yylex())
+  {
+    printf("%d", token);
+    if (token == NUMBER) {
+      printf(" = %f\n", yylval);
+    } else {
+      printf("\n");
+    }
+  }
+  return 0;
 }
 #endif

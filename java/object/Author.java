@@ -100,5 +100,19 @@ public class Author {
         this.deathYear = deathYear;
     }
 
-
+    /**
+     * Get a string representation of this object.
+     * 
+     * @return a string representation of this object.
+     * 
+     * @see java.lang.Object#toString
+     */
+    public final String toString() {
+        return new StringBuilder("name=" + name)
+            .append(", realName=" + realName)
+            .append(", birthYear=" + birthYear)
+            .append(", deathYear=" + deathYear)
+            .append(", hashCode=" + hashCode())
+            .toString();
+    }
 }

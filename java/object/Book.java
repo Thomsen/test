@@ -97,5 +97,19 @@ public class Book {
         this.author = author;
     }
 
-
+    /**
+     * Get a string representation of this object.
+     * 
+     * @return a string representation of this object.
+     * 
+     * @see java.lang.Object#toString
+     */
+    public final String toString() {
+        return new StringBuilder("title=" + title)
+            .append(", date=" + date)
+            .append(", pageCount=" + pageCount)
+            .append(", hashCode=" + hashCode())
+            .append(", author: " + author.toString())
+            .toString();
+    }
 }

@@ -6,7 +6,7 @@ public class O2NShallow {
         Book bkone = new Book("java", "2015-06-12 20:00:00", 999, auone);
 
         Author autwo = new Author("toli", "toline", "1992", "2008");
-        Book bktwo = new Book("cpp", "2015-06-12 18:00:00", 1288, autwo);
+        BookShallow bktwo = new BookShallow("cpp", "2015-06-12 18:00:00", 1288, autwo);
 
         System.out.println("--------------- source object -----------");
         System.out.println("auone " + auone.toString());
@@ -14,7 +14,7 @@ public class O2NShallow {
         System.out.println("bkone " + bkone.toString());
         System.out.println("bktwo " + bktwo.toString());
 
-        Book x = null;
+        BookShallow x = null;
 
         System.out.println("--------------- x object -----------");
         System.out.println("x " + x);
@@ -23,7 +23,7 @@ public class O2NShallow {
         System.out.println("bkone " + bkone.toString());
         System.out.println("bktwo " + bktwo.toString());
 
-        x = bktwo;
+        x = bktwo.clone();
 
         System.out.println("--------------- x := bktwo object -----------");
         System.out.println("x " + x.toString());

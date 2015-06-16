@@ -1,3 +1,4 @@
+// definitions section
 %{
   #include <stdio.h>
   #define YYSTYPE double
@@ -9,6 +10,7 @@
 
 %%
 
+// rules section
 calclist:
 | calclist exp EOL {printf("= %f\n", $2);}
 ;
@@ -30,6 +32,7 @@ term: NUMBER
 
 %%
 
+// user code section
 main (int argc, char **argv)
 {
   yyparse();

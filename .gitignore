@@ -2,3 +2,4 @@
 *.out
 *#
 *.class
+web/node/**/build

@@ -18,7 +18,7 @@ io.js 2.3.0集成了V8 4.2.77.20版本，其中包含的ES6特性远超joyent/no
 
 模块 | 知识点 | 示例
 :------------- | :------------- | :-----------------
-变量 | let | [let demo](../ecma/variable/letdemo.js)
+变量 | let、const | [let demo](../ecma/variable/letdemo.js) [const demo](../ecma/variable/constdemo.js)
 字符串 | |
 数值 | |
 数组 | |

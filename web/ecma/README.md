@@ -10,7 +10,7 @@ Learn from [Rev 38 Final Draft](http://wiki.ecmascript.org/lib/exe/fetch.php?id=
 
 使用io.js可以体验ES6的更多特性，通过源码安装（配置环境变量）：
 
-$  xz -d iojs-v2.3.0-linux-x64.tar.xz &  tar jxvf iojs-v2.3.0-linux-x64.tar
+$  xz -d iojs-v2.3.0-linux-x64.tar.xz &  tar xvf iojs-v2.3.0-linux-x64.tar
 
 io.js 2.3.0集成了V8 4.2.77.20版本，其中包含的ES6特性远超joyent/node@0.12.x集成的3.26.33版本所包含的。
 
@@ -18,7 +18,7 @@ io.js 2.3.0集成了V8 4.2.77.20版本，其中包含的ES6特性远超joyent/no
 
 模块 | 知识点 | 示例
 :------------- | :------------- | :-----------------
-变量 | let | [let demo](../master/varialbe/letdemo.js)
+变量 | let | [let demo](../ecma/variable/letdemo.js)
 字符串 | |
 数值 | |
 数组 | |

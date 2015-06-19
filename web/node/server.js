@@ -1,8 +1,12 @@
 var http = require('http');
+var fs = require('fs');
+
+var weibojson = fs.readFileSync('weibo.json', 'utf-8');
 
 http.createServer(function(request, response) {
-  response.writeHead(200, {"Content-Type": "text/plain"});
-  response.write("Hello Server");
+  response.writeHead(200, {"Content-Type": "text/html"});
+  response.write('<head><meta charset="utf-8"/></head>');
+  response.write(weibojson);
   response.end();
 }).listen(8888);
 

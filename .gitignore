@@ -3,3 +3,4 @@
 *#
 *.class
 web/node/**/build
+*/**/node_modules

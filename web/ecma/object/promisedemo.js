@@ -42,3 +42,53 @@ getJSON(url).then(function(json) {
 
 // cd ../../node && node server.js
 // iojs [debug] --use_strict promisedemo.js
+
+
+var promise2 = new Promise(function(resolve, reject) {
+  throw new Error('test');
+});
+
+promise2.catch(function(error) {
+  console.log(error);
+});
+
+// all race
+
+var timeoutLog = function(msg) {
+  var promise = new Promise(function(resolve, reject) {
+    setTimeout(function() {
+      console.log(msg);
+      resolve(msg);
+    }, 2000);
+  });
+  return promise;
+}
+
+var promises = [1, 2, 3, 4, 5, 6].map(function(id) {
+  return timeoutLog(id);
+});
+
+Promise.all(promises).then(function(posts) {
+  console.log(posts);
+}).catch(function(reason) {
+  console.log(reason);
+});
+
+Promise.race(promises).then(function(posts) {
+  console.log(posts);
+}).catch(function(reason) {
+  console.log(reason);
+});
+
+// resolve reject
+
+var p = Promise.resolve('Hello');
+
+p.then(function (s) {
+  console.log(s);
+});
+
+var pr = Promise.reject('reject error');
+pr.then(null, function (s) {
+  console.log(s);
+});

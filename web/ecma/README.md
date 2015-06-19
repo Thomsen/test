@@ -22,8 +22,8 @@ io.js 2.3.0集成了V8 4.2.77.20版本，其中包含的ES6特性远超joyent/no
 字符串 | |
 数值 | |
 数组 | |
-对象 | promise |
-函数 | generator |
+对象 | promise | [promise demo](../ecma/object/promisedemo.js)
+函数 | generator | [generator demo](../ecma/function/generatordemo.js) 
 集合 | map、set、weakmap、weakset |
 异步 | |
 

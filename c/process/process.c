@@ -5,9 +5,13 @@
 
 #include <pthread.h>
 
+static int shdata = 4;
+
 void *create(void *argv)
 {
-  printf("new thread created...\n");
+  printf("new thread created... tid = %d\n", (unsigned int)pthread_self());
+  printf("thread pid = %d, shared data = %d\n", getpid(), shdata);
+  return (void *) 0;
 }
 
 int main(int argv, char *argc)
@@ -18,11 +22,12 @@ int main(int argv, char *argc)
   pid_t pr;
 
   if (pid == 0) {
-    printf("fork pid = %d\n", pid);
+    sleep(1);
+    printf("fork pid = %d, shared data = %d\n", pid, shdata);
     pthread_t tidp;
-    int error;
-    error = pthread_create(&tidp, NULL, create, NULL);
-    if (error == 0) {
+    int tid;
+    tid = pthread_create(&tidp, NULL, create, NULL);
+    if (tid == 0) {
       printf("pthread_create is created...\n");
     } else {
       printf("pthread_create is not created...\n");
@@ -31,6 +36,7 @@ int main(int argv, char *argc)
     printf("fork new process error!\n");
     exit(-1);
   } else {
+    //sleep(1);
     printf("wait child process...\n");
     pr= wait(NULL);  // waitpid()
     if (WIFEXITED(status)) {
@@ -39,7 +45,7 @@ int main(int argv, char *argc)
       printf("this is parent pid = %d\n", pid);
     }
   }
-
+  sleep(1);
   return 0;
 }
 

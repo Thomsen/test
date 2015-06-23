@@ -77,3 +77,160 @@ try {
 } catch(e) {
   console.log('outer error catch', e);
 }
+
+
+// before ecma6
+function foo1(msg) {
+  console.log('foo1 ' + msg);
+}
+
+foo1('a', function(a) {
+  if (a.error) {
+    throw new Error(a.error);
+  }
+
+  foo1('b', function(b) {
+    if (b.error) {
+      throw new Error(b.error);
+    }
+
+    foo1('c', function(c) {
+      if (c.error) {
+        throw new Error(c.error);
+      }
+
+      console.log(a, b, c);
+    });
+  });
+});
+
+// == generator
+
+function* foo2() {
+  try {
+    var a = yield foo1('a');
+    var b = yield foo1('b');
+    var c = yield foo1('c');
+  } catch (e) {
+    console.log(e);
+  }
+
+  console.log(a, b, c);
+}
+
+
+// yield*
+
+let delegatedIterator = (function* () {
+  yield 'Hello';
+  yield 'yield*';
+}());
+
+let delegatingIterator = (function* () {
+  yield 'Greetings!';
+  yield* delegatedIterator;
+  yield 'Ok, bye!';
+}());
+
+for (let value of delegatingIterator) {
+  console.log(value);
+}
+
+// array is original yield*
+function* genArray() {
+  yield ["a", "b", "c"];
+  yield* ["d", "e", "f"];
+}
+
+var ga = genArray();
+console.log(ga.next());
+console.log(ga.next());
+
+// yield* nested
+function* iterTree(tree) {
+  if (Array.isArray(tree)) {
+    for (let i=0; i<tree.length; i++) {
+      yield* iterTree(tree[i]);
+    }
+  } else {
+    yield tree;
+  }
+}
+
+const tree = ['a', ['b', 'c'], ['d', 'e', 'f']];
+for (let x of iterTree(tree)) {
+  console.log(x);
+}
+
+// binary tree
+function Tree(left, label, right) {
+  this.left = left;
+  this.label = label;
+  this.right = right;
+}
+
+function* inorder(t) {
+  if (t) {
+    yield* inorder(t.left);
+    yield t.label;
+    yield* inorder(t.right);
+  }
+}
+
+function make(array) {
+  if (array.length == 1) {
+    return new Tree(null, array[0], null);
+  }
+  return new Tree(make(array[0]), array[1], make(array[2]));
+}
+let bt = make([
+  [['a'], 'b', ['c']],
+  'd',
+  [['e'], 'f', ['g']]
+]);
+
+var result = [];
+for (let node of inorder(bt)) {
+  result.push(node);
+}
+
+console.log(result);
+
+// object attribute
+
+let obj1  = {
+    * mygen1() {
+    }
+};
+
+let obj2 = {
+  mygen2: function* () {
+  }
+};
+
+
+// state machine
+
+// e5
+var ticking = true;
+var clock1 = function() {
+  if (ticking) {
+    console.log('Tick!');
+  } else {
+    console.log('Tock!');
+  }
+  ticking = !ticking;
+};
+
+// e6
+var clock2 = function*(_) {
+  while(true) {
+    yield _;
+    console.log('Tick!');
+    yield _;
+    console.log('Tock!');
+  }
+};
+
+
+// coroutine

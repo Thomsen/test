@@ -19,7 +19,7 @@ io.js 2.3.0集成了V8 4.2.77.20版本，其中包含的ES6特性远超joyent/no
 模块 | 知识点 | 示例
 :------------- | :------------- | :-----------------
 变量 | let、const、deconstruction | [let demo](../ecma/variable/letdemo.js) [const demo](../ecma/variable/constdemo.js) [deconstruction](../ecma/variable/deconstruction.js)
-字符串 | |
+字符串 | codePointAt、fromCodePoint、at、Unicode、normalize、includes、startsWith、endsWith、repeat、template string | [string demo](../ecma/variable/strdemo.js)
 数值 | |
 数组 | |
 对象 | promise | [promise demo](../ecma/object/promisedemo.js)

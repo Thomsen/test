@@ -5,9 +5,17 @@
 #include <unistd.h>
 #include <errno.h> // find /usr/include -name errno.h
 
+#include <stdlib.h>
+#include <string.h>
+
+#include <sys/stat.h>
+#include <fcntl.h>
+
+#include <time.h>  // assignment makes pointer from integer without a cast (str_time = ctime())
+
 void msg_stat(int, struct msqid_ds);
 
-main()
+main(int argc, char *argv[])
 {
   int gflags, sflags, rflags;
   key_t key;
@@ -25,12 +33,27 @@ main()
 
   struct msqid_ds msg_ginfo, msg_sinfo;
 
-  char* msgpath = "/tmp/msgqueue";
-  //key = ftok(msgpath, 'a');
+  if (argv == NULL) {
+    printf("please enter message queue file !");
+  }
 
+  char* msgdir = "/tmp/msgqueue/";
   struct timeval timenow;
   gettimeofday(&timenow, NULL);
+  char* msgfile = malloc(10);
+  sprintf(msgfile, "%d", timenow.tv_usec);
+  
+  char* msgpath = malloc(strlen(msgdir) + strlen(msgfile) + 1);
+  if (msgpath == NULL) {
+    exit(1);
+  }
+  strcpy(msgpath, msgdir);
+  strcat(msgpath, msgfile);
+  int fid = open(msgpath, O_RDWR | O_CREAT | O_EXCL);
+  key = ftok(msgpath, 'a');
+  /*
   key = (key_t) timenow.tv_usec;
+  */
   gflags = IPC_CREAT | IPC_EXCL;
   msgid = msgget(key, gflags|0666);
   if (msgid == -1) {
@@ -100,6 +123,8 @@ void msg_stat(int msgid, struct msqid_ds msg_info)
     return ;
   }
 
+  char* str_ctime;
+
   printf("\n");
   printf("current number of bytes on queue is %d\n", msg_info.msg_cbytes);
   printf("number of messages in queue is %d\n", msg_info.msg_qnum);
@@ -108,9 +133,12 @@ void msg_stat(int msgid, struct msqid_ds msg_info)
   printf("pid of last msgsnd is %d\n", msg_info.msg_lspid);
   printf("pid of last msgrcv is %d\n", msg_info.msg_lrpid);
 
-  //printf("last msgsnd time is %s\n", ctime(&(msg_info.msg_stime)));
-  //printf("last msgrcv time is %s\n", ctime(&(msg_info.msg_rtime)));
-  printf("last change time is %s\n", ctime(&(msg_info.msg_ctime)));
+  printf("last msgsnd time is %s\n", ctime(&(msg_info.msg_stime)));
+  printf("last msgrcv time is %s\n", ctime(&(msg_info.msg_rtime)));
+
+  str_ctime = ctime(&(msg_info.msg_ctime));
+  printf("last change time is %s\n", str_ctime);
+  
   printf("msg uid is %d\n", msg_info.msg_perm.uid);
   printf("msg gid is %d\n", msg_info.msg_perm.gid);
 

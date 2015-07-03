@@ -13,6 +13,8 @@
 
 #include <time.h>  // assignment makes pointer from integer without a cast (str_time = ctime())
 
+#define MAX_TEXT 4
+
 void msg_stat(int, struct msqid_ds);
 
 main(int argc, char *argv[])
@@ -20,6 +22,7 @@ main(int argc, char *argv[])
   int gflags, sflags, rflags;
   key_t key;
   int msgid;
+  int msgtype = 0;
   int reval;
   struct msgbuf {
     int mtype;
@@ -37,7 +40,7 @@ main(int argc, char *argv[])
     printf("please enter message queue file !");
   }
 
-  char* msgdir = "/tmp/msgqueue/";
+  char* msgdir = "/tmp/msgqueue/"; // mkdir /tmp/msgqueue
   struct timeval timenow;
   gettimeofday(&timenow, NULL);
   char* msgfile = malloc(10);
@@ -49,27 +52,18 @@ main(int argc, char *argv[])
   }
   strcpy(msgpath, msgdir);
   strcat(msgpath, msgfile);
-  int fid = open(msgpath, O_RDWR | O_CREAT | O_EXCL);
+  int fid = open(msgpath, O_RDWR | O_CREAT | O_EXCL, 0666 | S_IWOTH);
   key = ftok(msgpath, 'a');
-  /*
-  key = (key_t) timenow.tv_usec;
-  */
+
   gflags = IPC_CREAT | IPC_EXCL;
   msgid = msgget(key, gflags|0666);
   if (msgid == -1) {
     //printf("msg create error\n");
     fprintf(stderr, "msg create failed with error: %d\n", errno); // 17 EEXIST
-    if (errno == EEXIST) {
-      // ll /dev/mqueue
-      reval = msgctl(msgid, IPC_RMID, NULL);
-      if (reval == -1) {
-        printf("unlink msg queue error\n");
-        return ;
-      }
-    }
     return;
   }
 
+  printf("\nmsgget");
   msg_stat(msgid, msg_ginfo);
 
   sflags = IPC_NOWAIT; // <bits/ipc.h>
@@ -78,20 +72,22 @@ main(int argc, char *argv[])
 
   reval = msgsnd(msgid, &msg_sbuf, sizeof(msg_sbuf.mtext), sflags);
   if (reval == -1) {
-    printf("message send error\n");
+    fprintf(stderr, "message send failed with erro: %dr\n", errno);
   }
 
+  printf("\nmsgsnd");
   msg_stat(msgid, msg_ginfo);
 
   rflags = IPC_NOWAIT|MSG_NOERROR;
-  reval = msgrcv(msgid, &msg_rbuf, 4, 10, rflags);
+  reval = msgrcv(msgid, &msg_rbuf, MAX_TEXT, msgtype, rflags);
 
   if (reval == -1) {
-    printf("read msg error\n");
+    fprintf(stderr, "read msg failed with error: %d\n", errno); // 43 NOMSG msgtyep error
   } else {
     printf("read from msg queue %d bytes \n", reval);
   }
 
+  printf("\nmsgrcv");
   msg_stat(msgid, msg_ginfo);
 
   msg_sinfo.msg_perm.uid =8;
@@ -100,15 +96,16 @@ main(int argc, char *argv[])
 
   reval = msgctl(msgid, IPC_SET, &msg_sinfo);
   if (reval == -1) {
-    printf("msg set info error\n");
+    fprintf(stderr, "msg set info failed with error: %d\n", errno); // 1 EPERM $ sudo
     return;
   }
 
+  printf("\nmsgctl IPC_SET");
   msg_stat(msgid, msg_ginfo);
 
   reval = msgctl(msgid, IPC_RMID, NULL);
   if (reval == -1) {
-    printf("unlink msg queue error\n");
+    fprintf(stderr, "unlink msg queue failed with error: %d\n", errno);
     return ;
   }
 }
@@ -119,13 +116,13 @@ void msg_stat(int msgid, struct msqid_ds msg_info)
   sleep(1);
   reval = msgctl(msgid, IPC_STAT, &msg_info);
   if (reval == -1) {
-    printf("get msg info error\n");
+    printf("get msg info failed with error: %d\n", errno);
     return ;
   }
 
   char* str_ctime;
 
-  printf("\n");
+  printf("\n-------------------start-----------------------\n");
   printf("current number of bytes on queue is %d\n", msg_info.msg_cbytes);
   printf("number of messages in queue is %d\n", msg_info.msg_qnum);
   printf("max number of bytes on queue is %d\n", msg_info.msg_qbytes);
@@ -141,5 +138,6 @@ void msg_stat(int msgid, struct msqid_ds msg_info)
   
   printf("msg uid is %d\n", msg_info.msg_perm.uid);
   printf("msg gid is %d\n", msg_info.msg_perm.gid);
+  printf("---------------------end------------------------\n");
 
 }

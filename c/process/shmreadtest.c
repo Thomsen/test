@@ -16,6 +16,7 @@ main(int argc, char** argv)
   int shm_id, i;
   key_t key;
 
+  
   people *p_map;
   char* name = ".";
 
@@ -40,3 +41,5 @@ main(int argc, char** argv)
     perror("detach error.");
   }
 }
+
+// sudo run

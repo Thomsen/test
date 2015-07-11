@@ -42,3 +42,5 @@ main(int argc, char** argv)
     perror("detach error.");
   }
 }
+
+// sudo run

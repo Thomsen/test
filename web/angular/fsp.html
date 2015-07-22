@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+
+<html ng-app="fsp">
+  <head>
+    <script type="text/javascript" src="lib/angular.min.js">
+    </script>
+    <script type="text/javascript" src="js/fsp.js">
+    </script>
+  </head>
+  <body>
+    <form ng-controller="FspController">
+      <label>
+        number one:
+      </label>
+      <input name="total" type="number" ng-model="data.number1"/> <br />
+      <label>
+        number two:
+      </label>
+      <input name="divisor" type="number" ng-model="data.number2"/> <br />
+      <button ng-click="division()" >
+        division(*)
+      </button>
+      <button ng-click="division_provider()">
+        division provider(/)
+      </button>
+      <button ng-click="division_factory()">
+        division factory(+)
+      </button>
+      <button ng-click="division_service()">
+        division service(-)
+      </button>
+      <br />
+      <label>
+        result: {{ data.result }}
+      </label>
+    </form>
+  </body>
+</html>

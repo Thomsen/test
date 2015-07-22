@@ -2,7 +2,7 @@ $ cd /tmp
 $ wget http://www.erlang.org/download/otp_src_R15B01.tar.gz
 $ tar zxvf otp_src_R15B01.tar.gz
 $ ./configure --enable-hipe --enable-smp-support --enable-threads
-makd & make install 
+$ make & make install 
 
 $ sudo apt-get install erlang
 $ erl

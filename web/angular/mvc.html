@@ -9,12 +9,12 @@
   </head>
   <body ng-controller="TextController">
     <p>
-      {{sampleText}}
+      {{ data.sampleText}}
     </p>
   </body>
   <script>
     function TextController($scope) {
-      $scope.sampleText = 'This is mvc!';
+      $scope.data = {sampleText: 'This is mvc!'};
     }
   </script>
 </html>

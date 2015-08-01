@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script language="javascript" type="text/javascript">
+      function autoPlay() {
+      var mpaudio = document.getElementById('mpaudio');
+      mpaudio.play();
+      }
+    </script>
+  </head>
+  <body>
+    <audio id="mpaudio" src="stephen.mp3" controls="controls" loop="false" hidden="true">
+    </audio>
+    <input type="button" onclick="autoPlay()" value="play" />
+  </body>
+</html>

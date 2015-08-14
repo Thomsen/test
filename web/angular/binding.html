@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+
+<html ng-app>
+  <head>
+    <title>
+      Binding
+    </title>
+    <script type="text/javascript" src="lib/angular.min.js">
+    </script>
+  </head>
+  <body ng-controller="BindController">
+    <div>
+      <input ng-model="username" />
+    </div>
+    <div>
+      <button ng-click="show()">show</button>
+    </div>
+  </body>
+  <script>
+    function BindController($scope) {
+    $scope.show = function() {
+    var message = $scope.username; // bind to controller must valued
+    // $scope.username = 'jiang'; // bind to template ok
+    alert(message);
+    }
+    }
+  </script>
+</html>

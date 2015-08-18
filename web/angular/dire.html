@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html ng-app="dire">
+  <head>
+    <script type="text/javascript" src="lib/angular.min.js">
+    </script>
+    <script type="text/javascript" src="js/dire.js">
+    </script>
+  </head>
+  <body>
+    <hello>
+    </hello>
+
+    <hello2>
+      <br/>
+      <span>original content</span>
+    </hello2>
+
+    <div ng-controller="helloctrl">
+      <div ng-repeat="thing in things">
+        {{thing}}. <hello></hello>
+      </div>
+    </div>
+
+    <div hello3="dd"></div>
+
+    <div class="hello4"></div>
+
+    <!-- hello5 -->
+
+  </body>
+</html>

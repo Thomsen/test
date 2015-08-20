@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+
+<html ng-app="filt">
+  <head>
+    <script type="text/javascript" src="lib/angular.min.js">
+    </script>
+    <script type="text/javascript" src="js/filt.js">
+    </script>
+  </head>
+  <body ng-controller="filtctrl">
+    {{ num | number }}
+    <br/>
+    {{num | number:2}}
+    <br/>
+    first name:
+    <input ng-model="person.first"/>
+    <br/>
+    last name:
+    <input ng-model="person.last"/>
+    <br/>
+    name: {{person | fullname}}
+    <br/>
+    name: {{ person | fullname: "- -"}}
+    <br/>
+    name: {{person | fullname:" " | uppercase}}
+
+    <br/>
+    date ori: {{ date }}
+    <br/>
+    date: {{ date | date: 'yyyy-MM-dd hh:mm:ss EEEE'}}
+
+    <br/>
+    date time: {{ time }}
+    <br/>
+    date time: {{ time | date: hh:mm:ss}}
+  </body>
+</html>

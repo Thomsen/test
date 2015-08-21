@@ -1,0 +1,22 @@
+{
+  "name": "packgular",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node_modules/.bin/webpack-dev-server --content-base app --hot",
+    "start-win": "node_modules\\.bin\\webpack-dev-server.cmd --content-base app --hot"
+  },
+  "author": "",
+  "license": "apache",
+  "devDep": "npm install -D webpack",
+  "devDependencies": {
+    "webpack": "^1.11.0",
+    "webpack-dev-server": "^1.10.1"
+  },
+  "dep": "npm install --save angular",
+  "dependencies": {
+    "angular": "^1.4.4"
+  }
+}

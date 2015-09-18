@@ -148,4 +148,26 @@
     tx.addTask("task two queue");
   });
 
+
+
+  //////////////////// scope //////////////////////
+
+  function one(tx) {
+    var a  = tx;
+    console.log("fun one tx " + tx);
+    console.log("fun one a " + a);
+  }
+
+  function two(tx) {
+    var b = tx;
+    console.log("fun two tx " + tx);
+    console.log("fun two b " + b);
+  }
+
+  one("abc");
+  //console.log("outter tx " + tx); // undefined
+  //console.log("outter a " + a); // undefined
+  two("efg");
+  //console.log("outter tx " + tx); // undefined
+
 }).call(this); // need call this

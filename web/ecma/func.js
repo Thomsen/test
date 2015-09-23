@@ -170,4 +170,68 @@
   two("efg");
   //console.log("outter tx " + tx); // undefined
 
+  ////////////////////// params this //////////////////////
+
+  var FunThree = function(fn) {
+    this.fn = fn;
+  };
+
+  FunThree.prototype.start = function() {
+    this.fn(this);
+  };
+
+  FunThree.prototype.run = function(statement) {
+    console.log("run " + statement);
+  };
+
+  var ft = new FunThree(function(tx) {
+    console.log("new fun three");
+    tx.run("fun three sql");
+    console.log("fun three end");
+  });
+
+  ft.start();
+
+
+  ///////////////////// fun return ////////////////
+
+  var checka = function(bre) {
+    if (bre) {
+      console.log("checka break");
+      return ;
+    } else {
+      console.log("checka continue ");
+    };
+  };
+
+  var checkc = function(bre) {
+    console.log("checkc break");
+    return bre;
+  };
+
+  var checkb = function() {
+    checka(false);
+
+    console.log("chceckb continue ...");
+
+    checka(true);
+
+    console.log("checkb end");
+
+    if (checkc(false)) {
+      console.log("checkc false");
+      return ;
+    }
+    console.log("checkc continue ...");
+
+    if (checkc(true)) {
+      console.log("checkc true");
+      return ;
+    }
+    console.log("checkc end");
+
+  };
+
+  checkb();
+
 }).call(this); // need call this

@@ -12,13 +12,30 @@ public class SmackClient {
     
 	public static void main(String[] args) {
 		
+		
 		Client client = new Client();
 		client.setHost(HOST);
 		client.setPort(PORT);
 		client.setUsername("user2");
 		client.setPassword("123");
+		final Smack smack = new SmackImpl(client);
 		
-		Smack smack = new SmackImpl(client);
+		new Thread() {
+			public void run() {
+				smackInit(smack);
+				if (smack.isConnected()) {
+					for ( ; true ; ) {
+						
+					}
+				}
+			}
+		}.start();
+		
+
+	}
+	
+	private static void smackInit(final Smack smack) {
+		
 		System.out.println("client connect ...");
 		smack.connect();
 		System.out.println("client connected");

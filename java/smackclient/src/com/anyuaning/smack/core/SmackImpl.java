@@ -1,38 +1,30 @@
 package com.anyuaning.smack.core;
 
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.Map;
 
-import net.iharder.Base64;
-
 import org.jivesoftware.smack.SmackException;
 import org.jivesoftware.smack.SmackException.NotConnectedException;
-import org.jivesoftware.smack.StanzaListener;
 import org.jivesoftware.smack.XMPPException;
 import org.jivesoftware.smack.filter.AndFilter;
-import org.jivesoftware.smack.filter.PacketFilter;
-import org.jivesoftware.smack.filter.PacketTypeFilter;
 import org.jivesoftware.smack.filter.StanzaFilter;
 import org.jivesoftware.smack.filter.StanzaIdFilter;
 import org.jivesoftware.smack.filter.StanzaTypeFilter;
 import org.jivesoftware.smack.packet.IQ;
 import org.jivesoftware.smack.packet.Message;
-import org.jivesoftware.smack.packet.Stanza;
 import org.jivesoftware.smack.tcp.XMPPTCPConnection;
 import org.jivesoftware.smack.tcp.XMPPTCPConnectionConfiguration;
-import org.jivesoftware.smack.util.StringUtils;
-import org.jivesoftware.smack.util.stringencoder.Base64.Encoder;
 import org.jivesoftware.smackx.iqregister.packet.Registration;
 
-import com.anyuaning.smack.iq.User;
+import com.anyuaning.smack.listener.NotifiStanzaListener;
+import com.anyuaning.smack.listener.RegiStanzaListener;
 
 public class SmackImpl implements Smack {
 
     private static XMPPTCPConnection connection;
     
-    private static Client client;
+    private Client client;
     
     public SmackImpl(Client client) {
     	this.client = client;
@@ -52,36 +44,7 @@ public class SmackImpl implements Smack {
         	
             connection = new XMPPTCPConnection(configBuilder.build());
             
-            // dependence smack-java7
-//            org.jivesoftware.smack.util.stringencoder.Base64.setEncoder(new Encoder() {
-//    			
-//    			@Override
-//    			public String encodeToString(byte[] input, int offset, int len) {
-//    				return Base64.encodeBytes(input, offset, len);
-//    			}
-//    			
-//    			@Override
-//    			public byte[] encode(byte[] input, int offset, int len) {
-//    				String string = encodeToString(input, offset, len);
-//                    try {
-//                        return string.getBytes(StringUtils.USASCII);
-//                    } catch (UnsupportedEncodingException e) {
-//                        throw new AssertionError(e);
-//                    }
-//    			}
-//    			
-//    			@Override
-//    			public byte[] decode(byte[] input, int offset, int len) {
-//    				// TODO Auto-generated method stub
-//    				return null;
-//    			}
-//    			
-//    			@Override
-//    			public byte[] decode(String string) {
-//    				// TODO Auto-generated method stub
-//    				return null;
-//    			}
-//    		});
+            // dependence smack-java7, org.jivesoftware.smack.util.stringencoder.Base64.setEncoder
         }
         
         try {
@@ -104,20 +67,9 @@ public class SmackImpl implements Smack {
     	Registration regter = new Registration(atts);  // smack-extensions
     	regter.setType(IQ.Type.set);
     	
-//    	StanzaListener packetListener = new StanzaListener() {
-//			
-//			@Override
-//			public void processPacket(Stanza packet) throws NotConnectedException {
-//				if (packet instanceof IQ) {
-//					
-//				} else if (packet instanceof Message) {
-//					
-//				}
-//			}
-//		};
-//		StanzaFilter packetFilter = new AndFilter(new StanzaIdFilter(regter.getStanzaId()),
-//				new StanzaTypeFilter(IQ.class));
-//		connection.addAsyncStanzaListener(packetListener, packetFilter);
+		StanzaFilter packetFilter = new AndFilter(new StanzaIdFilter(regter.getStanzaId()),
+				new StanzaTypeFilter(IQ.class));
+		connection.addAsyncStanzaListener(new RegiStanzaListener(), packetFilter);
     	
     	try {
 			connection.sendStanza(regter);
@@ -135,8 +87,8 @@ public class SmackImpl implements Smack {
     	try {
 			connection.login(client.getUsername(), client.getPassword());
 			
-//			StanzaFilter pf = new StanzaTypeFilter(UserIQ.class);
-//			connection.addAsyncStanzaListener(null, pf);
+			StanzaFilter msgFilter = new StanzaTypeFilter(Message.class);
+			connection.addAsyncStanzaListener(new NotifiStanzaListener(), msgFilter);
 			
 		} catch (XMPPException e) {
 			e.printStackTrace();
@@ -148,5 +100,24 @@ public class SmackImpl implements Smack {
     	
         return false;
     }
+
+	@Override
+	public boolean isConnected() {
+		return (connection == null) ? false : connection.isConnected();
+	}
+
+	@Override
+	public boolean isAuthenticated() {
+		return (connection == null) ? false : connection.isAuthenticated();
+	}
+
+	@Override
+	public boolean disconnect() {
+		if (null != connection && connection.isConnected()) {
+			connection.disconnect();
+			return true;
+		}
+		return false;
+	}
 
 }

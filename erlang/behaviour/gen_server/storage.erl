@@ -1,0 +1,27 @@
+-module(storage).
+
+-export([init/0, handle_call/2, add/2, find/1, start/0]).
+
+init() ->
+    dict:new().
+
+handle_call({add, Key, Value}, Dict) ->
+    {ok, dict:store(Key, Value, Dict)};
+handle_call({find, Key}, Dict) ->
+    {dict:find(Key, Dict), Dict}.
+
+add(Key, Value) ->
+    server:call(kv_storage, {add, Key, Value}).
+
+find(Key) ->
+    server:call(kv_storage, {find, Key}).
+
+start() ->
+    server:start(kv_storage, ?MODULE).
+
+
+%% > storage:start().
+%% > storage:add(name, tom).
+%% ok
+%% > storage:find(name).
+%% {ok,tom}

@@ -16,7 +16,7 @@ public class SmackClient {
 		Client client = new Client();
 		client.setHost(HOST);
 		client.setPort(PORT);
-		client.setUsername("user2");
+		client.setUsername("user_token");
 		client.setPassword("123");
 		final Smack smack = new SmackImpl(client);
 		

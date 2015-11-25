@@ -16,6 +16,7 @@ import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map.Entry;
 
@@ -25,6 +26,12 @@ import javax.net.ssl.SSLContext;
 import javax.net.ssl.SSLSession;
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
+
+import org.jivesoftware.smack.packet.Message;
+
+import com.alibaba.fastjson.JSONArray;
+import com.anyuaning.smack.iq.MsgBody;
+import com.anyuaning.smack.iq.NotiMsg;
 
 public class HttpSendClient {
 
@@ -81,26 +88,55 @@ public class HttpSendClient {
 		String url = "http://localhost:5286/inter/";
 		String charset = "UTF-8";
 
-		String query = "<message to=\"user2@192.168.1.130\" from=\"localhost/rest\"><body>hello rest msg 2</body></message>";
+//		String query = "<message from=\"localhost/rest\" to=\"user2@192.168.1.130\"><body>hello rest msg</body></message>";
+		
+//		Message msg = new Message();
+//		msg.setFrom("localhost/rest");
+//		msg.setBody("hello rest msg");
+//		msg.setTo("user2@192.168.1.130");
+//		String query = msg.toString();
+		
+		NotiMsg notiMsg = new NotiMsg();
+		notiMsg.setFrom("localhost/rest");
+		List<String> users = new ArrayList<String>();
+		users.add("user@192.168.1.130");
+		users.add("81083@192.168.1.130");
+		notiMsg.setTo(users);
+		
+		MsgBody body = new MsgBody();
+		body.setTitle("title");
+		body.setContent("content");
+		body.setBuzId("111");
+		body.setBuzType("order");
+		body.setUri("uri");
+		notiMsg.setBody(JSONArray.toJSONString(body));
+		
+		String query = JSONArray.toJSONString(notiMsg);
+		
+		// {} two post request with conn.getResponseCode()
+		
+//		String query = "\\{\"body\":\"msg inter\",\"from\":\"localhost/rest\",\"to\":[\"user2@192.168.1.130\"]\\}";
 
 		try {
 			CookieHandler.setDefault(new CookieManager(null, CookiePolicy.ACCEPT_ALL));
-			System.setProperty("http.keepAlive", "false");
+			System.setProperty("http.keepAlive", "true");
 			
 			HttpURLConnection conn = (HttpURLConnection) new URL(url)
 					.openConnection(); // httpurlconnection in order response
 
 			conn.setDoOutput(true);
 			conn.setRequestProperty("Accept-Charset", charset);
+			conn.setRequestMethod("POST");
 			conn.setRequestProperty("Content-Type",
 					"application/x-www-form-urlencoded;charset=" + charset);
 
-			try (OutputStream output = conn.getOutputStream()) {
+			System.out.println("query " + query);
+			try (OutputStream output = conn.getOutputStream()) {  // socket connection
 				output.write(query.getBytes(charset));
 				output.flush();
-				output.close();
+//				output.close();
 			}
-
+			
 			int status = conn.getResponseCode();
 			System.out.println("connection status: " + status);
 
@@ -110,7 +146,7 @@ public class HttpSendClient {
 			}
 
 			if (200 == status) {
-				InputStream response = conn.getInputStream();
+				InputStream response = conn.getInputStream(); // server process data
 	
 				String contentType = conn.getHeaderField("Content-Type");
 				charset = null;

@@ -1,5 +1,5 @@
 .eunit
 .rebar
 ebin
-depsx
+deps
 rel

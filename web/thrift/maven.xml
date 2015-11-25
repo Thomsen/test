@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+      <project xmlns:j="jelly:core">
+
+        <goal name="goal">
+
+          <mkdir dir="${test.result.dir}"/>
+          <echo>Executing JUnit tests</echo>
+
+        </goal>
+
+        <preGoal name="pre">
+
+        </preGoal>
+        <postGoal name="post">
+
+        </postGoal>
+      </project>

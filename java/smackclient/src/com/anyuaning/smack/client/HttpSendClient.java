@@ -30,6 +30,7 @@ import javax.net.ssl.X509TrustManager;
 import org.jivesoftware.smack.packet.Message;
 
 import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import com.anyuaning.smack.iq.MsgBody;
 import com.anyuaning.smack.iq.NotiMsg;
 
@@ -84,6 +85,12 @@ public class HttpSendClient {
 	
 	public static void main(String[] args) {
 		
+		String singleJson = "{\"aps\":{\"alert\":\"title\",\"sound\":\"default\"}, \"message\":\"{'buzId':'111','buzType':'order','content':'content','title':'title','uri':'uri'}\"}";
+		JSONObject jsonObj = new JSONObject().parseObject(singleJson);
+		JSONObject msgObj = new JSONObject().parseObject(jsonObj.getString("message"));
+		String title = msgObj.getString("title");
+		System.out.println("single json title: " + title);
+		
 //		String url = "http://localhost:5285/rest/";
 		String url = "http://localhost:5286/inter/";
 		String charset = "UTF-8";
@@ -100,7 +107,8 @@ public class HttpSendClient {
 		notiMsg.setFrom("localhost/rest");
 		List<String> users = new ArrayList<String>();
 		users.add("user@192.168.1.130");
-		users.add("81083@192.168.1.130");
+//		users.add("81083@192.168.1.130");
+//		users.add("5c21d9d6-44ec-4c68-86ae-9dd42276b7a8@192.168.1.130");
 		notiMsg.setTo(users);
 		
 		MsgBody body = new MsgBody();

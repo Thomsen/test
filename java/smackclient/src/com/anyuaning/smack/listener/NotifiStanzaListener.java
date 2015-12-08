@@ -9,7 +9,7 @@ public class NotifiStanzaListener implements StanzaListener {
 
 	@Override
 	public void processPacket(Stanza packet) throws NotConnectedException {
-		System.out.println("notifi stanza: " + packet.toString());
+		System.out.println("process notifi stanza: " + packet.toString());
 		
 		if (packet instanceof Message) {
 			Message msg = (Message) packet;

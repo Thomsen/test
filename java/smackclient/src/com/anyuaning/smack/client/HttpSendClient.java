@@ -106,9 +106,9 @@ public class HttpSendClient {
 		NotiMsg notiMsg = new NotiMsg();
 		notiMsg.setFrom("localhost/rest");
 		List<String> users = new ArrayList<String>();
-		users.add("user@192.168.1.130");
-//		users.add("81083@192.168.1.130");
-//		users.add("5c21d9d6-44ec-4c68-86ae-9dd42276b7a8@192.168.1.130");
+		users.add("user");
+//		users.add("81083");
+		users.add("5c21d9d6-44ec-4c68-86ae-9dd42276b7a8");
 		notiMsg.setTo(users);
 		
 		MsgBody body = new MsgBody();

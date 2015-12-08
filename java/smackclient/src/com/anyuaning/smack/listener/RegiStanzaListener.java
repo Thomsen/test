@@ -9,7 +9,7 @@ public class RegiStanzaListener implements StanzaListener {
 
 	@Override
 	public void processPacket(Stanza packet) throws NotConnectedException {
-		System.out.println("regi stanza: " + packet.toXML());
+		System.out.println("process regi stanza: " + packet.toXML());
 		if (packet instanceof IQ) {
 			
 		}

@@ -9,7 +9,7 @@ import com.anyuaning.smack.core.Smack;
 import com.anyuaning.smack.core.SmackImpl;
 import com.anyuaning.smack.learn.Connection;
 
-public class SmackClient {
+public class SmackClient2 {
 
 	public static final String HOST = "192.168.1.130";
     public static final int PORT = 5222;
@@ -20,25 +20,29 @@ public class SmackClient {
 		Client client = new Client();
 		client.setHost(HOST);
 		client.setPort(PORT);
-//		client.setUsername("user#imei");
+		client.setUsername("user2#imei");
 //		client.setUsername("user_token");
-		client.setUsername("7bd4cdd6-3f0b-407d-8d4b-16c4cb86ddcf#imei");
 		client.setPassword("123");
 		final Smack smack = new SmackImpl(client);
 		
 		new Thread() {
 			public void run() {
 				smackInit(smack);
+				
 				if (smack.isConnected()) {
-
-//					smack.sendMessage("user2#imei", "user1 say hello", new ChatMessageListener() {
-//						
-//						@Override
-//						public void processMessage(Chat chat, Message message) {
-//							System.out. println("Received message£º " + message);
-//						}
-//					});
-
+					
+//					Message msg = new Message();
+//					msg.setBody("user2 say hello");
+//					msg.setFrom("localhost");
+//					msg.setTo("user#imei");
+					smack.sendMessage("user", "user2 say hello", new ChatMessageListener() {
+						
+						@Override
+						public void processMessage(Chat chat, Message message) {
+							System.out.println("Received message£º " + message);
+						}
+					});
+					
 					for ( ; true ; ) {
 						
 					}

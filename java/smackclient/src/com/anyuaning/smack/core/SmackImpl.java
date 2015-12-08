@@ -4,15 +4,20 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.jivesoftware.smack.MessageListener;
 import org.jivesoftware.smack.SmackException;
 import org.jivesoftware.smack.SmackException.NotConnectedException;
 import org.jivesoftware.smack.XMPPException;
+import org.jivesoftware.smack.chat.Chat;
+import org.jivesoftware.smack.chat.ChatManager;
+import org.jivesoftware.smack.chat.ChatMessageListener;
 import org.jivesoftware.smack.filter.AndFilter;
 import org.jivesoftware.smack.filter.StanzaFilter;
 import org.jivesoftware.smack.filter.StanzaIdFilter;
 import org.jivesoftware.smack.filter.StanzaTypeFilter;
 import org.jivesoftware.smack.packet.IQ;
 import org.jivesoftware.smack.packet.Message;
+import org.jivesoftware.smack.packet.Stanza;
 import org.jivesoftware.smack.tcp.XMPPTCPConnection;
 import org.jivesoftware.smack.tcp.XMPPTCPConnectionConfiguration;
 import org.jivesoftware.smackx.iqregister.packet.Registration;
@@ -118,6 +123,24 @@ public class SmackImpl implements Smack {
 			return true;
 		}
 		return false;
+	}
+
+	@Override
+	public String sendMessage(String toUser, String msg, ChatMessageListener listener) {
+		String userJID = toUser + "@" + connection.getServiceName();
+		Chat chat = ChatManager.getInstanceFor(connection).createChat(userJID, listener);
+		try {
+			chat.sendMessage(msg);
+		} catch (NotConnectedException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	@Override
+	public String reciveMessage() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

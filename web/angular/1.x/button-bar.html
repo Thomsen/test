@@ -1,0 +1,13 @@
+<html ng-app="button-bar">
+  <head>
+    <script type="text/javascript" src="lib/angular.min.js"></script>
+    <script type="text/javascript" src="js/button-bar.js"></script>
+    <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css">
+  </head>
+  <body>
+    <div ng-controller="BtnBarController">
+      <button-bar class="primary" ng-click="primaryClick()">{{primaryLabel}}</button-bar>
+      <button-bar class="btn btn-primary">Primary</button-bar>
+    </div>
+  </body>
+</html>

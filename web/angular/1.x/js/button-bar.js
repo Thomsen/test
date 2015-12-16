@@ -27,7 +27,7 @@ bb.directive('secondary', function() {
   };
 });
 
-bb.directive('buttonBar', function() {
+bb.directive('buttonBar3', function() {
   return {
     restrict: 'EA',
     template: '<div class="span4 well clearfix"><div class="primary-block pull-right"></div><div class="secondary-block"></div><div class="transcluded" ng-transclude></div></div>',
@@ -60,6 +60,40 @@ bb.directive('buttonBar', function() {
         }
       });
       transcludedBlock.remove();
+    }
+  };
+});
+
+bb.directive('buttonBar', function() {
+  return {
+    restrict: 'EA',
+    template: '<div class="span4 well clearfix"><div class="primary-block pull-right"></div><div class="secondary-block"></div></div>',
+    replace: true,
+    transclude: true,
+    compile: function(elem, attrs, transcludeFn) {
+      return function(scope, element, attrs) {
+        transcludeFn(scope, function(clone) {
+          var primaryBlock = angular.element(element[0].querySelector('.primary-block'));
+          var secondaryBlock = angular.element(element[0].querySelector('.secondary-block'));
+          console.log("clone: " + angular.toJson(clone));
+          //var transcludedButtons = clone.filter(':button');  // es5 add filter
+          var transcludedButtons = [];
+          for (var c in clone) {
+            var val = clone[c];
+            console.log("val: " + val);
+            if (val instanceof HTMLButtonElement) {
+              transcludedButtons.push(val);
+            }
+          }
+          angular.forEach(transcludedButtons, function(e) {
+            if (angular.element(e).hasClass('primary')) {
+              primaryBlock.append(e);
+            } else if (angular.element(e).hasClass('secondary')) {
+              secondaryBlock.append(e);
+            }
+          });
+        });
+      };
     }
   };
 });

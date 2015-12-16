@@ -64,7 +64,7 @@ bb.directive('buttonBar3', function() {
   };
 });
 
-bb.directive('buttonBar', function() {
+bb.directive('buttonBar2', function() {
   return {
     restrict: 'EA',
     template: '<div class="span4 well clearfix"><div class="primary-block pull-right"></div><div class="secondary-block"></div></div>',
@@ -95,5 +95,35 @@ bb.directive('buttonBar', function() {
         });
       };
     }
+  };
+});
+
+bb.directive('buttonBar', function() {
+  return {
+    restrict: 'EA',
+    template: '<div class="span4 well clearfix"><div class="primary-block pull-right"></div><div class="secondary-block"></div></div>',
+    replace: true,
+    transclude: true,
+    controller: ['$scope', '$element', '$transclude', function($scope, $element, $transclude) {
+      $transclude(function(clone) {
+        var primaryBlock = angular.element($element[0].querySelector('div.primary-block'));
+        var secondaryBlock = angular.element($element[0].querySelector('div.secondary-block'));
+        var transcludedButtons = [];
+          for (var c in clone) {
+            var val = clone[c];
+            console.log("val: " + val);
+            if (val instanceof HTMLButtonElement) {
+              transcludedButtons.push(val);
+            }
+          }
+          angular.forEach(transcludedButtons, function(e) {
+            if (angular.element(e).hasClass('primary')) {
+              primaryBlock.append(e);
+            } else if (angular.element(e).hasClass('secondary')) {
+              secondaryBlock.append(e);
+            }
+          });
+      });
+    }]
   };
 });

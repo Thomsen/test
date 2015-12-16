@@ -6,8 +6,13 @@
   </head>
   <body>
     <div ng-controller="BtnBarController">
-      <button-bar class="primary" ng-click="primaryClick()">{{primaryLabel}}</button-bar>
-      <button-bar class="btn btn-primary">Primary</button-bar>
+      <!-- <button-bar class="primary" ng-click="primaryClick()">{{primaryLabel}}</button-bar> -->
+      <!-- <button-bar class="btn btn-primary">Primary</button-bar> -->
+      <button-bar>
+        <button class="primary" ng-click="primaryClick()">{{primaryLabel}}</button>
+        <button class="primary">Primary</button>
+        <button class="secondary">Secondary</button>
+      </button-bar>
     </div>
   </body>
 </html>

@@ -1,7 +1,7 @@
 {
   "name": "undefinedundefinedtodos",
   "description": "A Vue.js project",
-  "author": "undefinedandroidfoross@gmail.com",
+  "author": "androidfoross@gmail.com",
   "private": true,
   "scripts": {
     "dev": "webpack-dev-server --inline --hot --config build/webpack.dev.conf.js",

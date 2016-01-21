@@ -20,6 +20,7 @@ config.output.publicPath = '/'
 config.plugins = (config.plugins || []).concat([
   // generate HTML on the fly
   new HtmlWebpackPlugin({
+    title: "todos development",
     filename: 'index.html',
     template: 'src/index.html'
   })

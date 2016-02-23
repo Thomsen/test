@@ -1,17 +1,13 @@
 package com.anyuaning.smack.client;
 
-import org.jivesoftware.smack.chat.Chat;
-import org.jivesoftware.smack.chat.ChatMessageListener;
-import org.jivesoftware.smack.packet.Message;
-
 import com.anyuaning.smack.core.Client;
 import com.anyuaning.smack.core.Smack;
 import com.anyuaning.smack.core.SmackImpl;
-import com.anyuaning.smack.learn.Connection;
 
 public class SmackClient {
 
-	public static final String HOST = "192.168.1.130";
+//	public static final String HOST = "192.168.1.130";
+	public static final String HOST = "112.74.214.6";
     public static final int PORT = 5222;
     
 	public static void main(String[] args) {
@@ -21,8 +17,8 @@ public class SmackClient {
 		client.setHost(HOST);
 		client.setPort(PORT);
 //		client.setUsername("user#imei");
-//		client.setUsername("user_token");
-		client.setUsername("7bd4cdd6-3f0b-407d-8d4b-16c4cb86ddcf#imei");
+		client.setUsername("user_token");
+//		client.setUsername("7bd4cdd6-3f0b-407d-8d4b-16c4cb86ddcf#imei");
 		client.setPassword("123");
 		final Smack smack = new SmackImpl(client);
 		

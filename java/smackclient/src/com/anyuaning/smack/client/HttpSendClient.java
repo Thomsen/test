@@ -92,7 +92,8 @@ public class HttpSendClient {
 		System.out.println("single json title: " + title);
 		
 //		String url = "http://localhost:5285/rest/";
-		String url = "http://localhost:5286/inter/";
+//		String url = "http://localhost:5286/inter/";
+		String url = "http://112.74.214.6:5286/inter/";
 		String charset = "UTF-8";
 
 //		String query = "<message from=\"localhost/rest\" to=\"user2@192.168.1.130\"><body>hello rest msg</body></message>";
@@ -106,9 +107,11 @@ public class HttpSendClient {
 		NotiMsg notiMsg = new NotiMsg();
 		notiMsg.setFrom("localhost/rest");
 		List<String> users = new ArrayList<String>();
-		users.add("user");
+//		users.add("user");
 //		users.add("81083");
-		users.add("5c21d9d6-44ec-4c68-86ae-9dd42276b7a8");
+//		users.add("5c21d9d6-44ec-4c68-86ae-9dd42276b7a8");
+		users.add("02e9697f-953f-4e2d-9bbb-80d6235bfe6c");
+//		users.add("7bd4cdd6-3f0b-407d-8d4b-16c4cb86ddcf");
 		notiMsg.setTo(users);
 		
 		MsgBody body = new MsgBody();
@@ -123,7 +126,7 @@ public class HttpSendClient {
 		
 		// {} two post request with conn.getResponseCode()
 		
-//		String query = "\\{\"body\":\"msg inter\",\"from\":\"localhost/rest\",\"to\":[\"user2@192.168.1.130\"]\\}";
+//		String query = "\\{\"body\":\"msg inter\",\"from\":\"localhost/rest\",\"to\":[\"5c21d9d6-44ec-4c68-86ae-9dd42276b7a8\"]\\}";
 
 		try {
 			CookieHandler.setDefault(new CookieManager(null, CookiePolicy.ACCEPT_ALL));

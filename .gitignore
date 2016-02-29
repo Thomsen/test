@@ -4,4 +4,8 @@
 *.class
 web/node/**/build
 */**/node_modules
+*/**/typings
+*/**/.pub
+*/**/packages
+*/**/.packages
 *.beam

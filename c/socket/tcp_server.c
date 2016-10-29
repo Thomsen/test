@@ -64,7 +64,7 @@ int main (int argc, char *argv[])
     }
 
     /* connect */
-    printf("Handling client %s\n", inet_ntoa(echoClientAddr.sin_addr));
+    printf("client %s connected\n", inet_ntoa(echoClientAddr.sin_addr));
     handle_tcp_client(clientSock);
   }
 

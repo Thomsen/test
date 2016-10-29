@@ -68,7 +68,7 @@ int main(int argc, char *argv[])
   }
 
   totalBytesRcvd = 0;
-  printf("Received: \n");
+  printf("client recv: ");
 
   while (totalBytesRcvd < echoStringLen)
   {

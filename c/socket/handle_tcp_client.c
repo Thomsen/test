@@ -10,6 +10,7 @@ void handle_tcp_client(int clientSocket)
 {
   char echoBuffer[RECEIVE_BUFFER_SIZE];
   int recvMsgSize;
+  char* resp = "server resp";
 
   /* recv */
   if ((recvMsgSize = recv(clientSocket, echoBuffer, RECEIVE_BUFFER_SIZE, 0)) < 0)
@@ -19,6 +20,9 @@ void handle_tcp_client(int clientSocket)
 
   while (recvMsgSize > 0 )
   {
+
+    printf("server recv: %s", echoBuffer);
+
     /* send */
     if (send(clientSocket, echoBuffer, recvMsgSize, 0) != recvMsgSize)
     {
@@ -31,6 +35,7 @@ void handle_tcp_client(int clientSocket)
       exit_with_error("while recv() failed");
     };
   }
+  printf("\n");
 
   /* close */
   close(clientSocket);

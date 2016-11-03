@@ -1,3 +1,7 @@
 install express
 
 $ npm install express --registry=https://registry.npm.taobao.org --save
+
+test coverage
+
+$ npm run cov

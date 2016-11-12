@@ -1,0 +1,28 @@
+constant function: O(1)
+logarithm function: O(logn)
+polynomial function: O(n^c)
+exponential function: O(a^n)
+
+2-subset is np-complete
+
+back of the envelope calculation
+
+paradigms:
+iteration
+recursion
+
+strategies:
+decrease and conquer
+devide and conquer
+
+analysis:
+recursion trace
+recurrence
+
+make it work, make it right, make it fast - kent beck
+work and right - recursion
+fast - interation
+
+search:
+binary search
+fiboniacci search

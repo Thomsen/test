@@ -11,8 +11,7 @@ interface Person {
 }
 
 
-
-function greeter(person : Person) {
+function greeter(person: Person) {
   return "Hello, " + person.firstname + " " + person.lastname;
 }
 

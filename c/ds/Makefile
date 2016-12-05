@@ -1,4 +1,4 @@
-objs := iteration.o recursion.o main.o
+objs := iteration.o recursion.o sort.o search.o main.o
 cc := gcc
 
 

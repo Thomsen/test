@@ -1,9 +1,11 @@
 *#
+*.#*
 
 *.o
 *.out
 c/socket/tcpclient
 c/socket/tcpserver
+c/ds/ds
 
 *.class
 

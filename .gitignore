@@ -1,7 +1,12 @@
+*#
+
 *.o
 *.out
-*#
+c/socket/tcpclient
+c/socket/tcpserver
+
 *.class
+
 web/node/**/build
 */**/node_modules
 */**/typings
@@ -9,3 +14,6 @@ web/node/**/build
 */**/packages
 */**/.packages
 *.beam
+
+*/**/__pycache__
+*/**/*.pyc

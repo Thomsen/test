@@ -93,7 +93,7 @@ public class HttpSendClient {
 		
 //		String url = "http://localhost:5285/rest/";
 //		String url = "http://localhost:5286/inter/";
-		String url = "http://112.74.214.6:5286/inter/";
+		String url = "http://localhost:5286/inter/";
 		String charset = "UTF-8";
 
 //		String query = "<message from=\"localhost/rest\" to=\"user2@192.168.1.130\"><body>hello rest msg</body></message>";

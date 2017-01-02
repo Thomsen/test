@@ -4,19 +4,19 @@ function Person() {
 
 var person = new Person();
 
-Person.prototype.say = function() {
+Person.prototype.say = function () {
   console.log("hi,", this.name);
 };
 
 Person.prototype = {
-  eat: function() {
+  eat: function () {
     console.log(this.name, "eat some food");
   }
 };
 
-person.say();
+person.say(); // hi, thom
 
-//person.eat(); // undefined
+// person.eat(); // undefined
 
 // var person = new Person(); // 创建实例的时候生成了一个原型对象指向{}
 // Person.protype.say // 在已指向的原型对象中创建方法
@@ -31,7 +31,7 @@ var person2 = new Person();
 
 //person2.say(); // undefined
 
-person2.eat();
+person2.eat();  // thom eat somd food
 
 // 原型结构
 /*

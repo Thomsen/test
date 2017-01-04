@@ -35,13 +35,13 @@ test3();
 
 // 函数中块域作用在函数域上
 
-var test4 = function(flag) {
+var test4 = function (flag) {
   if (flag) {
     var scope4 = "if scope4";  // 这里的var很有意思：
     // 如果没有var，先执行test4()会报scope4 is not defined。先执行test4(true)会输出(2, if scope4)，再执行test4()会输出(undefined, if scope4)
     // 如果有var，先执行test4()会输出(undefined, undefined)。先执行test4(true)会输出(2, if scope4)，在执行test4()会输出(undefined, undefined)
     // note: js中没有用var声明的变量都是全局变量
-    for (var i4=0; i4<2; i4++) {
+    for (var i4 = 0; i4 < 2; i4++) {
       ;
     }
   }
@@ -76,11 +76,11 @@ test5();  // (local inside scope5, local scope5, local scope5)
 console.log(scope5);  // (global scope5)
 
 
-var scope6 = {name: 'husband', age: 28, height: 175, wife: {name: 'wife', age: 25}};
+var scope6 = { name: 'husband', age: 28, height: 175, wife: { name: 'wife', age: 25 } };
 
 console.log(scope6.wife.name);
 
-with(scope6.wife) {
+with (scope6.wife) {
   console.log(name);  // (wife) with语句临时将语句中的对象添加到作用域头部
 }
 

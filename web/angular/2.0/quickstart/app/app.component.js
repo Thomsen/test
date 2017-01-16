@@ -15,7 +15,10 @@ var AppComponent = (function () {
     AppComponent = __decorate([
         core_1.Component({
             selector: 'my-app',
-            template: '<h1>Angualar 2.0 typescript app</h1>'
+            // template: require('./app.html!text')
+            moduleId: module.id,
+            templateUrl: 'app.html',
+            styleUrls: ['app.css']
         }), 
         __metadata('design:paramtypes', [])
     ], AppComponent);

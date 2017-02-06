@@ -12,6 +12,7 @@ var core_1 = require('@angular/core');
 var platform_browser_1 = require('@angular/platform-browser');
 var app_component_1 = require('./app.component');
 var material_1 = require('@angular/material');
+var logger_service_1 = require('./logger.service');
 require('hammerjs');
 var AppModule = (function () {
     function AppModule() {
@@ -19,7 +20,7 @@ var AppModule = (function () {
     AppModule = __decorate([
         core_1.NgModule({
             imports: [platform_browser_1.BrowserModule, material_1.MaterialModule.forRoot()],
-            // providers: [Logger],
+            providers: [logger_service_1.Logger],
             declarations: [app_component_1.AppComponent],
             exports: [app_component_1.AppComponent],
             bootstrap: [app_component_1.AppComponent]

@@ -1,0 +1,59 @@
+<!doctype html>
+
+<html>
+  <head>
+    <script type="text/javascript" >
+'use strict';
+var f1 = null;
+var a;
+
+function foo() {
+  var a = 2;
+  function innerFoo() {
+    console.log('g: ' + a);
+  }
+  f1 = innerFoo;
+}
+
+function bar() {
+  f1();
+}
+
+function foo2() {
+  function innerFoo2(a) {
+    console.log('h: ' + a);
+  }
+  return innerFoo2;
+}
+function bar2() {
+  //foo2(20);
+  foo2().call(10);   // undefined
+  var f2 = foo2();
+  f2(20);            // 20, f2.call(20) undefined
+  f2.call(null, 30); // call(thisArg [, arg1 [, arg2 [, ...]]])
+  Function.prototype.call(f2, 30);
+}
+
+console.log('foo:');
+foo();  // 执行完后，生命周期结束，所占内存被垃圾回收器释放。但由于f1得到innerFoo引用，无法回收
+console.log('bar:');
+a = 3;  // 'use strict' need var, otherwise is not defined
+bar();  // g: 2，可以访问被保留下来的变量对象。foo称为闭包
+
+bar2();
+
+    </script>
+  </head>
+  <body onload="">
+    <p>closure test</p>
+    <img alt="" src="closure_1.png"/>
+    <img alt="" src="closure_2.png"/>
+    <img alt="" src="closure_3.png"/>
+    <img alt="" src="closure_4.png"/>
+    <img alt="" src="closure_5.png"/>
+    <img alt="" src="closure_6.png"/>
+    <img alt="" src="closure_7.png"/>
+    <img alt="" src="closure_8.png"/a>
+    <img alt="" src="closure_9.png"/a>
+  </body>
+</html>

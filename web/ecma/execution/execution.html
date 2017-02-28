@@ -1,0 +1,52 @@
+<!doctype html>
+
+<html>
+  <head>
+    <script type="text/javascript" >
+      //'use strict';
+      (function () {
+  console.log(this);  // global object
+  var name = 'global user';
+
+  var person = {
+    name: 'person user',
+    son: {
+      name: 'son user',
+      getName: function () {
+        console.log(this);
+        return this.name;
+      }
+    },
+    getName: function () {
+      console.log(this);
+      return this.name;
+    }
+  }
+
+  console.log(person.son.getName());  // son user, this -> { name: 'son user', getName: [Function: getName] }
+  var son = person.son.getName();
+  console.log(son);                // son user, this -> { name: 'son user', getName: [Function: getName] }
+  var son2 = person.son.getName;
+  console.log(son2());             // node: undefined this -> global object; firefox: global user, not strict this -> window, strict this -> undefined
+  var people = person.getName();
+  console.log(people);             // person user, this -> { name: 'person user', son: { name: 'son user', getName: [Function: getName] }, getName: [Function: getName] }
+  var people2 = person.getName;
+  console.log(people2());          // node: undefined, this -> global object; firefox: global user
+
+} ());
+
+    </script>
+  </head>
+  <body onload="">
+    <p>execution test</p>
+    <img alt="" src="execution_1.png"/>
+    <img alt="" src="execution_2.png"/>
+    <img alt="" src="execution_3.png"/>
+    <img alt="" src="execution_4.png"/>
+    <img alt="" src="execution_5.png"/>
+    <img alt="" src="execution_6.png"/>
+    <img alt="" src="execution_7.png"/>
+    <img alt="" src="execution_8.png"/>
+    <img alt="" src="execution_9.png"/>
+  </body>
+</html>

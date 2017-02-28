@@ -5,7 +5,7 @@ a = "orange";
 console.log("a = " + a);  // orange
 console.log("b = " + b);  // apple
 
-var c = {name: "apple"}; // reference
+var c = { name: "apple" }; // reference
 var d = c;               // address copy
 
 c.name = "orange";
@@ -14,15 +14,15 @@ console.log("c name = " + c.name); // orange
 console.log("d name = " + d.name); // orange
 
 
-var e = {name: "apple"}; // reference
+var e = { name: "apple" }; // reference
 var f = e;               // address copy
 
-e = {name: "orange"};    // address restrict
+e = { name: "orange" };    // address restrict
 
 console.log("e name = " + e.name); // orange
 console.log("f name = " + f.name); // apple
 
-var g = {name: "apple"};  // reference
+var g = { name: "apple" };  // reference
 var h = g.name;           // value copy
 
 g.name = "orange";
@@ -47,3 +47,20 @@ console.log("i === j is " + (i === j)); // false
 
 // 基本类型和引用类型
 // '=='会将引用类型转换为基本类型，进行值比较；'==='因为类型不同，结果不等。
+
+
+function changeStuff(a, b, c) {
+  a = a * 3;
+  b.value = "stuff";
+  c = { value: "stuff" };
+}
+
+var num = 10;
+var obj1 = { value: "origin" };
+var obj2 = { value: "origin" };
+
+changeStuff(num, obj1, obj2);
+
+console.log(num);         // 10
+console.log(obj1.value);  // stuff
+console.log(obj2.value);  // origin

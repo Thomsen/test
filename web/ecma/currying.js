@@ -54,6 +54,14 @@ console.log(arr2);
 
 // apply和call非常相似，apply使用的是参数数组，call使用的是参数列表
 
+function fc() {
+  var a = 11;
+  console.log('fc: ' + this.a);
+}
+var obj = { a: 22 };
+fc();                 // undefined, this -> global object
+fc.call(obj);         // 22
+
 ////
 
 function add() {

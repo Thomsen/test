@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8"/>
+    <!--
+    <script>
+      function foo() {
+       console.log('scrolling');
+      }
+
+      document.addEventListener('DOMContentLoaded', function() {
+        let elem = document.getElementById('container');  // not DOMContentLoaded elem is null
+        elem.addEventListener('scroll', foo());
+      });
+
+    </script> -->
+    <title>throttling and debouncing</title>
+  </head>
+  <body id="container" >  <!-- onscroll="foo()" -->
+    <ul id="up">
+      <li class="ci"></li>
+      <li class="ci"></li>
+      <li class="ci"></li>
+      <li class="ci"></li>
+      <li class="ci"></li>
+      <li class="ci"></li>
+      <li class="ci"></li>
+      <li class="ci"></li>
+      <li class="ci"></li>
+      <li class="ci"></li>
+      <li class="ci"></li>
+      <li class="ci"></li>
+      <li class="ci"></li>
+      <li class="ci"></li>
+      <li class="ci"></li>
+      <li class="ci"></li>
+      <li class="ci"></li>
+      <li class="ci"></li>
+      <li class="ci"></li>
+      <li class="ci"></li>
+      <li class="ci"></li>
+      <li class="ci"></li>
+      <li class="ci"></li>
+      <li class="ci"></li>
+      <li class="ci"></li>
+      <li class="ci"></li>
+      <li class="ci"></li>
+      <li class="ci"></li>
+      <li class="ci"></li>
+      <li class="ci"></li>
+      <li class="ci"></li>
+      <li class="ci"></li>
+      <li class="ci"></li>
+      <li class="ci"></li>
+      <li class="ci"></li>
+      <li class="ci"></li>
+      <li class="ci"></li>
+      <li class="ci"></li>
+      <li class="ci"></li>
+      <li class="ci"></li>
+      <li class="ci"></li>
+      <li class="ci"></li>
+      <li class="ci"></li>
+      <li class="ci"></li>
+      <li class="ci"></li>
+      <li class="ci"></li>
+      <li class="ci"></li>
+      <li class="ci"></li>
+      <li class="ci"></li>
+      <li class="ci"></li>
+      <li class="ci"></li>
+      <li class="ci"></li>
+      <li class="ci"></li>
+      <li class="ci"></li>
+      <li class="ci"></li>
+      <li class="ci"></li>
+      <li class="ci"></li>
+      <li class="ci"></li>
+      <li class="ci"></li>
+      <li class="ci"></li>
+      <li class="ci"></li>
+      <li class="ci"></li>
+      <li class="ci"></li>
+      <li class="ci"></li>
+      <li class="ci"></li>
+      <li class="ci"></li>
+      <li class="ci"></li>
+      <li class="ci"></li>
+      <li class="ci"></li>
+      <li class="ci"></li>
+      <li class="ci"></li>
+      <li class="ci"></li>
+      <li class="ci"></li>
+      <li class="ci"></li>
+      <li class="ci"></li>
+      <li class="ci"></li>
+      <li class="ci"></li>
+      <li class="ci"></li>
+      <li class="ci"></li>
+      <li class="ci"></li>
+      <li class="ci"></li>
+      <li class="ci"></li>
+      <li class="ci"></li>
+      <li class="ci"></li>
+      <li class="ci"></li>
+      <li class="ci"></li>
+      <li class="ci"></li>
+      <li class="ci"></li>
+      <li class="ci"></li>
+      <li class="ci"></li>
+      <li class="ci"></li>
+      <li class="ci"></li>
+      <li class="ci"></li>
+      <li class="ci"></li>
+      <li class="ci"></li>
+      <li class="ci"></li>
+      <li class="ci"></li>
+      <li class="ci"></li>
+      <li class="ci"></li>
+      <li class="ci"></li>
+    </ul>
+
+     <script>
+      function foo() {
+        console.log('body scrolling ' + new Date());
+      }
+
+      function foo2() {
+        debounce(foo(), 5000);
+      }
+
+      function throttle(fn, delay) {
+        var last = 0;
+        return function() {
+          var curr =+ new Date();
+          if (curr - last > delay) {
+            fn.apply(this, arguments);
+            last = curr;
+          }
+        }
+      }
+
+      function debounce(fn, delay) {  // need bind event
+        let timer = null;
+        return function() {
+          let context = this;
+          let args = arguments;
+          clearTimeout(timer);
+          timer = setTimeout(function() {
+            fn.apply(context, args);
+          }, delay);
+        }
+      }
+
+      let upelem = document.getElementById('up');
+      let elem = upelem.getElementsByClassName('ci');
+      //window.addEventListener('scroll', foo);                   // need window, upelem only once foo()
+      //window.addEventListener('scroll', debounce(foo, 1000));   // execute on scroll end after one second,  scroll to requestAnimationFrame
+      window.addEventListener('scroll', throttle(foo, 2000));
+
+
+    </script>
+  </body>
+</html>

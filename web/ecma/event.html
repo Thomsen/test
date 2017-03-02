@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8"/>
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+      let app = document.getElementById('todo-app');
+      let items = app.getElementsByClassName('item');
+
+      // for (let item of items) {  // items max 10
+      //   item.addEventListener('click', function() {
+      //     alert('clicked: ' + item.innerHTML);
+      //   });
+      // }
+
+      app.addEventListener('click', function(e) {  // RadioGroup onClickListener
+        if (e.target && e.target.nodeName === 'LI') {
+          let item = e.target;
+          alert('delegation clicked: ' + item.innerHTML);
+        }
+      });
+
+      });
+    </script>
+    <title>event delegation</title>
+  </head>
+  <body>
+    <ul id="todo-app">
+      <li class="item">one task</li>
+      <li class="item">two task</li>
+      <li class="item">three task</li>
+      <li class="item">four task</li>
+      <li class="item">five task</li>
+      <li class="item">six task</li>
+      <li class="item">seven task</li>
+      <li class="item">eight task</li>
+      <li class="item">nine task</li>
+      <li class="item">ten task</li>
+    </ul>
+  </body>
+</html>

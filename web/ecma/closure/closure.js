@@ -28,6 +28,13 @@ for (var i = 0; i < 5; i++) {
 }
 
 
+for (let i = 0; i < 5; i++) {
+  setTimeout(function () {
+    console.log('dd ' + i);  // 0, 1, 2, 3, 4
+  })
+}
+
+
 // for (var i = 0; i < 5; i++) {
 //   setTimeout(function (i) {
 //     console.log('e: ' + i);  //

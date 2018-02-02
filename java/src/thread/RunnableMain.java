@@ -1,3 +1,10 @@
+package thread;
+
+import com.sun.deploy.util.StringUtils;
+import sun.swing.StringUIClientPropertyKey;
+import thread.RunnableTest;
+
+import java.util.concurrent.CountDownLatch;
 
 /**
  * Created by IntelliJ IDEA.
@@ -10,30 +17,20 @@ public class RunnableMain {
     
     public static void main(String[] args) {
         
-        RunnableTest rt = new RunnableTest();
-        
-        new Thread(rt).start();
+        RunnableTest rt = new RunnableTest("threadA");
+
+        Thread threadA = new Thread(rt);
+        threadA.start();
+
+        RunnableTest rtb = new RunnableTest("threadB");
+
+        Thread threadB = new Thread(rtb);
+        threadB.start();
 
     }
+
+
 }
 
-class RunnableTest implements  Runnable {
-
-    @Override
-    public void run() {
-
-        for (int i=0; i<5; i++) {
-            System.out.println("runnable test " + i);
-
-            // need Thread
-            try {
-                Thread.sleep(2000);
-            } catch (InterruptedException e) {
-                System.out.println("interrupted exception");
-            }
-        }
-
-    }
-}
 
 

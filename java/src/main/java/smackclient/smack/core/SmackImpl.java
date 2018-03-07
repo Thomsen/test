@@ -20,30 +20,29 @@ import org.jivesoftware.smack.packet.Message;
 import org.jivesoftware.smack.packet.Stanza;
 import org.jivesoftware.smack.tcp.XMPPTCPConnection;
 import org.jivesoftware.smack.tcp.XMPPTCPConnectionConfiguration;
-import org.jivesoftware.smackx.iqregister.packet.Registration;
+
 
 import smackclient.smack.listener.NotifiStanzaListener;
 import smackclient.smack.listener.RegiStanzaListener;
 
 public class SmackImpl implements Smack {
 
-    private static XMPPTCPConnection connection;
-    
-    private smackclient.smack.core.Client client;
-    
-    public SmackImpl(smackclient.smack.core.Client client) {
-    	this.client = client;
-    }
+	private static XMPPTCPConnection connection;
 
-    @Override
-    public boolean connect() {
-        if (null == connection) {
-        	XMPPTCPConnectionConfiguration.Builder configBuilder = XMPPTCPConnectionConfiguration.builder();
-        	
-        	configBuilder.setHost(client.getHost());
-        	configBuilder.setServiceName(client.getHost());
-        	configBuilder.setPort(client.getPort());
-        	
+	private Client client;
+
+	public SmackImpl(smackclient.smack.core.Client client) {
+		this.client = client;
+	}
+
+	@Override
+	public boolean connect() {
+		if (null == connection) {
+			XMPPTCPConnectionConfiguration.Builder configBuilder = XMPPTCPConnectionConfiguration.builder();
+
+			configBuilder.setHost(client.getHost());
+			configBuilder.setPort(client.getPort());
+
 //        	configBuilder.setSecurityMode(SecurityMode.required);
         	configBuilder.setCompressionEnabled(false);
         	
@@ -58,9 +57,11 @@ public class SmackImpl implements Smack {
 			return true;
 		} catch (SmackException | IOException | XMPPException e) {
 			e.printStackTrace();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
 		}
-        
-        return false;
+
+		return false;
     }
 
     @Override
@@ -69,19 +70,19 @@ public class SmackImpl implements Smack {
     	Map<String, String> atts = new HashMap<String, String>();
     	atts.put("username", client.getUsername());
     	atts.put("password", client.getPassword());
-    	Registration regter = new Registration(atts);  // smack-extensions
-    	regter.setType(IQ.Type.set);
-    	
-		StanzaFilter packetFilter = new AndFilter(new StanzaIdFilter(regter.getStanzaId()),
-				new StanzaTypeFilter(IQ.class));
-		connection.addAsyncStanzaListener(new RegiStanzaListener(), packetFilter);
-    	
-    	try {
-			connection.sendStanza(regter);
-		} catch (NotConnectedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+//    	Registration regter = new Registration(atts);  // smack-extensions
+//    	regter.setType(IQ.Type.set);
+//
+//		StanzaFilter packetFilter = new AndFilter(new StanzaIdFilter(regter.getStanzaId()),
+//				new StanzaTypeFilter(IQ.class));
+//		connection.addAsyncStanzaListener(new RegiStanzaListener(), packetFilter);
+//
+//    	try {
+//			connection.sendStanza(regter);
+//		} catch (NotConnectedException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
     	
         return false;
     }
@@ -101,9 +102,11 @@ public class SmackImpl implements Smack {
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
 		}
-    	
-        return false;
+
+		return false;
     }
 
 	@Override
@@ -128,12 +131,12 @@ public class SmackImpl implements Smack {
 	@Override
 	public String sendMessage(String toUser, String msg, ChatMessageListener listener) {
 		String userJID = toUser + "@" + connection.getServiceName();
-		Chat chat = ChatManager.getInstanceFor(connection).createChat(userJID, listener);
-		try {
-			chat.sendMessage(msg);
-		} catch (NotConnectedException e) {
-			e.printStackTrace();
-		}
+//		Chat chat = ChatManager.getInstanceFor(connection).createChat(userJID, listener);
+//		try {
+//			chat.sendMessage(msg);
+//		} catch (NotConnectedException e) {
+//			e.printStackTrace();
+//		}
 		return null;
 	}
 

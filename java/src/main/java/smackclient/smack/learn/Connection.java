@@ -14,9 +14,10 @@ import org.jivesoftware.smack.SmackException;
 import org.jivesoftware.smack.ConnectionConfiguration.SecurityMode;
 import org.jivesoftware.smack.SmackException.NotConnectedException;
 import org.jivesoftware.smack.XMPPException;
-import org.jivesoftware.smack.packet.PlainStreamElement;
+import org.jivesoftware.smack.packet.Nonza;
 import org.jivesoftware.smack.packet.Stanza;
 import org.jivesoftware.smack.packet.TopLevelStreamElement;
+import org.jxmpp.jid.parts.Resourcepart;
 
 public class Connection extends AbstractXMPPConnection {
 
@@ -35,7 +36,6 @@ public class Connection extends AbstractXMPPConnection {
         builder.setHost(HOST);
         builder.setPort(PORT);
 
-        builder.setServiceName(HOST);
         builder.setSecurityMode(SecurityMode.required);
 
         return builder;
@@ -51,11 +51,11 @@ public class Connection extends AbstractXMPPConnection {
 //            listener.connectionCreated(this);
 //        }
 
-        user = config.getUsername()
-            + "@"
-            + config.getServiceName()
-            + "/"
-            + (config.getResource() != null ? config.getResource() : "Test");
+//        user = config.getUsername()
+//            + "@"
+//            + config.getServiceName()
+//            + "/"
+//            + (config.getResource() != null ? config.getResource() : "Test");
     }
 
     @Override
@@ -73,12 +73,17 @@ public class Connection extends AbstractXMPPConnection {
     }
 
     @Override
-    public void send(PlainStreamElement element) throws NotConnectedException {
-        if (SmackConfiguration.DEBUG) {
-            System.out.println("[SEND]: " + element.toXML());
-        }
-        queue.add(element);
+    public void sendNonza(Nonza nonza) throws NotConnectedException, InterruptedException {
+
     }
+
+//    @Override
+//    public void send(PlainStreamElement element) throws NotConnectedException {
+//        if (SmackConfiguration.DEBUG) {
+//            System.out.println("[SEND]: " + element.toXML());
+//        }
+//        queue.add(element);
+//    }
 
     @Override
     public boolean isUsingCompression() {
@@ -99,32 +104,37 @@ public class Connection extends AbstractXMPPConnection {
     }
 
     @Override
-    protected void loginNonAnonymously(String username, String password,
-                                       String resource) throws XMPPException, SmackException, IOException {
-        StringBuilder sbud = new StringBuilder();
-        sbud.append(username);
-        sbud.append("@");
-        sbud.append(config.getServiceName());
-        sbud.append("/");
-        sbud.append((resource != null ? resource : "Smack"));
-        user = sbud.toString();
+    protected void loginInternal(String s, String s1, Resourcepart resourcepart) throws XMPPException, SmackException, IOException, InterruptedException {
 
-        authenticated = true;
     }
 
-    @Override
-    protected void loginAnonymously() throws XMPPException, SmackException,
-                                             IOException {
-        if (!isConnected()) {
-            throw new IllegalStateException("Not connected to server.");
-        }
-
-        if (!isAuthenticated()) {
-            throw new IllegalStateException("Already logged in to server.");
-        }
-
-        authenticated = true;
-    }
+//    @Override
+//    protected void loginNonAnonymously(String username, String password,
+//                                       String resource) throws XMPPException, SmackException, IOException {
+//        StringBuilder sbud = new StringBuilder();
+//        sbud.append(username);
+//        sbud.append("@");
+//        sbud.append(config.getServiceName());
+//        sbud.append("/");
+//        sbud.append((resource != null ? resource : "Smack"));
+//        user = sbud.toString();
+//
+//        authenticated = true;
+//    }
+//
+//    @Override
+//    protected void loginAnonymously() throws XMPPException, SmackException,
+//                                             IOException {
+//        if (!isConnected()) {
+//            throw new IllegalStateException("Not connected to server.");
+//        }
+//
+//        if (!isAuthenticated()) {
+//            throw new IllegalStateException("Already logged in to server.");
+//        }
+//
+//        authenticated = true;
+//    }
 
     @Override
     protected void shutdown() {

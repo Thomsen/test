@@ -1,8 +1,12 @@
 package aop;
 
-import net.sf.cglib.proxy.MethodInterceptor;
-import net.sf.cglib.proxy.Enhancer;
-import net.sf.cglib.proxy.MethodProxy;
+//import net.sf.cglib.proxy.MethodInterceptor;
+//import net.sf.cglib.proxy.Enhancer;
+//import net.sf.cglib.proxy.MethodProxy;
+
+import org.mockito.cglib.proxy.Enhancer;
+import org.mockito.cglib.proxy.MethodInterceptor;
+import org.mockito.cglib.proxy.MethodProxy;
 
 import java.lang.reflect.Method;
 

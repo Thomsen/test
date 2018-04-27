@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8"/>
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="el"></div>
+    <button id="btn_one" onclick="addHandler()">btn one </button>
+    <script>
+      <!-- for ie -- >
+        function leakMemory() {
+        var el = document.getElementById('el');
+        var o = {'el': el};
+        el.o = o;
+        }
+        function addHandler() {
+        var btnOne = document.getElementById('btn_one');
+        btnOne.onclick = function() {
+        btnOne.style.backgroundColor = 'red';
+        }
+        }
+    </script>
+  </body>
+</html>

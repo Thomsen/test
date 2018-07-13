@@ -1,0 +1,4 @@
+name: demo
+
+dependencies:
+  rxdart: ^0.15.0

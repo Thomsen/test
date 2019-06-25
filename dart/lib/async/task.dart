@@ -9,7 +9,35 @@ void main() {
     futureTask('msg');
 
     spawnIsolate();
+
+    fac();
 }
+
+Future<dynamic> asyncFactoriali(n) async{
+  // sendPort 需要通过 ReceivePort 获取
+  final response = ReceivePort();
+  await Isolate.spawn(_isolate, response.sendPort);
+  // 获取 sendPort 发送数据
+  final sendPort = await response.first as SendPort;
+  // 接受消息
+  final answer = ReceivePort();
+  sendPort.send([n, answer.sendPort]);
+  return answer.first;
+}
+
+_isolate(initialReplyTo) async {
+  final port = ReceivePort();
+  // 绑定
+  initialReplyTo.send(port.sendPort);
+  final message = await port.first as List;
+  final data = message[0] as int;
+  final send = message[1] as SendPort;
+  send.send(syncFactorial(data));
+}
+
+int syncFactorial(n) => n < 2 ? n : n * syncFactorial(n-1);
+
+fac() async => print(await asyncFactoriali(4));
 
 void log(msg) => print(msg);
 

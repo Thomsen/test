@@ -13,8 +13,21 @@ void main() {
 
 void log(msg) => print(msg);
 
-void spawnIsolate() {
-  Isolate.spawn(log, "hello isolate");
+void sendMsg(SendPort sp) => sp.send("message");
+
+Isolate isolate;
+
+void spawnIsolate() async {
+  ReceivePort receivePort = ReceivePort();
+
+  isolate =  await Isolate.spawn(sendMsg, receivePort.sendPort);
+
+  receivePort.listen((data) {
+    print("main receive: $data");
+    receivePort.close();
+    isolate?.kill(priority: Isolate.immediate);
+    isolate = null;
+  });
 }
 
 void futureTask(msg) {

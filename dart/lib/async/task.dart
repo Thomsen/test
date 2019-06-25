@@ -11,6 +11,12 @@ void main() {
     spawnIsolate();
 
     fac();
+
+    facCompute();
+}
+
+void facCompute() async {
+  print('fac compute:  ${await syncFactorial(8)}');
 }
 
 Future<dynamic> asyncFactoriali(n) async{
@@ -37,7 +43,7 @@ _isolate(initialReplyTo) async {
 
 int syncFactorial(n) => n < 2 ? n : n * syncFactorial(n-1);
 
-fac() async => print(await asyncFactoriali(4));
+fac() async => print('fac: ${await asyncFactoriali(4)} ');
 
 void log(msg) => print(msg);
 

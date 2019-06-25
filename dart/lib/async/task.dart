@@ -1,9 +1,76 @@
 
 import 'dart:async';
 
+import 'dart:isolate';
+
 void main() {
     // testTask2();
-    singleTask();
+    // singleTask();
+    futureTask('msg');
+
+    spawnIsolate();
+}
+
+void log(msg) => print(msg);
+
+void spawnIsolate() {
+  Isolate.spawn(log, "hello isolate");
+}
+
+void futureTask(msg) {
+  Future(() => print('f1'));
+
+  Future fx = Future(() => null);
+
+  Future(() => print('f2')).then((_) {
+    print('f3');
+    scheduleMicrotask(() => print('f4'));
+  }).then((_) => print('f5'));
+
+  Future(() => print('f6'))
+    .then((_) => Future(() => print('f7')))
+    .then((_) => print('f8'));
+
+  Future(() => print('f9'));
+
+  fx.then((_) => print('f10'));
+
+  scheduleMicrotask(() => print('f11'));
+
+  print('f12');
+
+  // 单个 Future
+  // 函数体放入EQ；外部后续代码继续同步执行；EeventLoop按序取出Event，同步执行相应链路
+
+  // 多个 Future
+  // 依次加入Event Queue的先后顺序
+  // then执行体的Future执行体完毕后立即同步执行
+  // 多个then方法执行体按链式调用有序执行
+  // 若Future执行体已经完毕，后续加入的then执行体则放入MicroTask Queue
+
+  // f12
+  // f11
+  // f1
+  // null f10
+  // f2 f3 f5 f4
+  // f6
+  // f9
+  // f7 f8
+
+
+  Future(() => print('f13'))
+    .then((_) async => await Future(() => print('f14')))
+    .then((_) => print('f15'));
+
+  // f13 f14 f15
+
+  Future(() => print('f16'))
+    .then((_) async => await scheduleMicrotask(() => print('f17')))
+    .then((_) => print('f18'));
+
+  // f16 f17 f18
+  // f13 f16 f17 f18 f14 f15
+
 }
 
 void  singleTask() {

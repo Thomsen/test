@@ -1,5 +1,3 @@
+rootProject.name = 'kt.jvm'
 
-
-rootProject.name = "jvm"
 //rootProject.buildFileName = "build.gradle.kts"
-

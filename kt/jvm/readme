@@ -19,3 +19,5 @@ Source package (default: jvm): kt
 
 
 > ./gradlew build --refresh-dependencies
+
+create gradle project with kotlin dsl in intelli idea

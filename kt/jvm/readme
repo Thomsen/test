@@ -1,0 +1,21 @@
+
+> gradle init --dsl kotlin
+
+Select type of project to generate:
+  1: basic
+  2: cpp-application
+  3: cpp-library
+  4: groovy-application
+  5: groovy-library
+  6: java-application
+  7: java-library
+  8: kotlin-application
+  9: kotlin-library
+  10: scala-library
+Enter selection (default: basic) [1..10] 8
+
+Project name (default: jvm):
+Source package (default: jvm): kt
+
+
+> ./gradlew build --refresh-dependencies

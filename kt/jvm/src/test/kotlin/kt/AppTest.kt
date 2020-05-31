@@ -11,3 +11,8 @@ import kotlin.test.assertNotNull
 //        assertNotNull(classUnderTest.greeting, "app should have a greeting")
 //    }
 //}
+
+
+fun printBlock(name: String) {
+    println("============ $name ============")
+}

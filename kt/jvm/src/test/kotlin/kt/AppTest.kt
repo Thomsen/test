@@ -3,14 +3,21 @@
  */
 package kt
 
+import org.junit.jupiter.api.Test
+import org.junit.platform.runner.JUnitPlatform
+import org.junit.platform.suite.api.SelectPackages
+import org.junit.runner.RunWith
 import kotlin.test.assertNotNull
 
-//class AppTest {
-//    @Test fun testAppHasAGreeting() {
+@RunWith(JUnitPlatform::class)
+@SelectPackages("kt.rx")
+class AppTest {
+//    @Test
+//    fun testAppHasAGreeting() {
 //        val classUnderTest = App()
 //        assertNotNull(classUnderTest.greeting, "app should have a greeting")
 //    }
-//}
+}
 
 
 fun printBlock(name: String) {

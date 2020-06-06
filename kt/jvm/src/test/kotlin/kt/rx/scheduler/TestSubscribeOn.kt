@@ -23,11 +23,11 @@ class TestSubscribeOn {
             .map {
                 println("map-2:" + Thread.currentThread().name)
             }
-            .subscribeOn(Schedulers.io())
+            .subscribeOn(Schedulers.io())  // io intensive task
             .map {
                 println("map-3:" + Thread.currentThread().name)
             }
-            .subscribeOn(Schedulers.computation())
+            .subscribeOn(Schedulers.computation())  // cpu intensive task
             .subscribe {
                 println("subscribe:" + Thread.currentThread().name)
             }

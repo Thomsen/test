@@ -10,7 +10,9 @@ class TestFlatMap {
     fun testFlatMap() {
         printBlock("test flat map")
         val disposable = Observable.just("A", "B", "c")
-            .flatMap{ Observable.just(it) }
+            .flatMap {
+                Observable.just(it)
+            }
             .subscribe {
                 println(it)
             }

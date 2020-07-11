@@ -40,6 +40,8 @@ dependencies {
     implementation(kotlin("stdlib"))
     implementation("io.reactivex.rxjava3:rxkotlin:3.0.0")
 
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.7")
+
     // Use the Kotlin test library.
     testImplementation("org.jetbrains.kotlin:kotlin-test")
 

@@ -55,9 +55,9 @@ dependencies {
     testRuntimeOnly("org.junit.vintage:junit-vintage-engine:5.6.2")
 }
 
-// $ gradle wrapper --gradle-version 6.3
+// $ gradle wrapper --gradle-version 6.4.1
 //task<Wrapper>("wrapper") {
-//    gradleVersion = "6.3"
+//    gradleVersion = "6.4.1"
 //}
 
 //tasks.withType<KotlinCompile> {

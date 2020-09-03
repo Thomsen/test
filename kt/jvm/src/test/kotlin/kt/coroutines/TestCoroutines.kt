@@ -4,15 +4,43 @@ import kotlinx.coroutines.*
 import org.junit.Test
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
+import kotlin.concurrent.thread
 
 class TestCoroutines {
 
     @Test
     fun exampleBlocking() {
+        GlobalScope.launch {
+            delay(1000)
+            println("five")
+        }
+        GlobalScope.launch {
+            delay(3000)
+            println("four")
+        }
         println("one")
         runBlocking {
             printDelayed("two")
         }
+//        Thread.sleep(4000)
+        println("three")
+    }
+
+    @Test
+    fun exampleThread() {
+        thread {
+            Thread.sleep(1000)
+            println("five")
+        }
+        thread {
+            Thread.sleep(3000)
+            println("four")
+        }
+        println("one")
+        runBlocking {
+            printDelayed("two")
+        }
+//        Thread.sleep(4000)
         println("three")
     }
 

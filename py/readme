@@ -1,3 +1,7 @@
 fundamentally a computer:
 performs calculations
 remembers the results
+
+requirements:
+pip3 freeze > requirements.txt
+pip3 install -r requirements.txt

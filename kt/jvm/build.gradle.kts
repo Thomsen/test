@@ -21,7 +21,7 @@
 
 plugins {
     application
-    kotlin("jvm") version "1.3.70"
+    kotlin("jvm") version "1.4.0"
 }
 
 apply {
@@ -35,12 +35,21 @@ repositories {
     mavenCentral()
 }
 
+sourceSets {
+    main {
+        java.srcDir("src/main/kotlin")
+    }
+}
+
 dependencies {
 //    implementation(kotlinModule("stdlib-jdk8", kotlinVersion))
     implementation(kotlin("stdlib"))
     implementation("io.reactivex.rxjava3:rxkotlin:3.0.0")
 
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.7")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.9")
+
+    // gson
+    implementation("com.google.code.gson:gson:2.8.6")
 
     // Use the Kotlin test library.
     testImplementation("org.jetbrains.kotlin:kotlin-test")

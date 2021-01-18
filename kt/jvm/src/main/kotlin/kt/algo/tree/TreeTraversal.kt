@@ -22,4 +22,8 @@ fun main() {
     println()
     print("after traverse: ")
     tree.postOrder()
+
+    println()
+    print("bfs: ")
+    print(tree.bfs(tree.rootNode, TreeNode(value = 5)))
 }

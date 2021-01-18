@@ -6,7 +6,6 @@ import kotlinx.coroutines.channels.ReceiveChannel
 import kotlinx.coroutines.channels.produce
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.runBlocking
-import sun.rmi.runtime.Log
 import java.util.concurrent.CompletableFuture
 
 fun fooAsync(s: String): CompletableFuture<Unit> =

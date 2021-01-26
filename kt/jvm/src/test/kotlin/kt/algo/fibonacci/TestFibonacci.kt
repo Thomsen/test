@@ -5,9 +5,28 @@ import kotlin.test.assertEquals
 
 class TestFibonacci {
 
+//    lateinit var fibKeys: Array<Int>
+//
+//    lateinit var fibVals: Array<Int>
+//
+//    @Before
+//    fun setupInit() {
+//        fibKeys = arrayOf(-1, 0, 1, 2, 3, 4, 5, 6, 7 , 8 , 9)
+//        fibVals = arrayOf( 0, 0, 1, 1, 2, 3, 5, 8, 13, 21, 34)
+//    }
+
+    var fibKeys: Array<Int> =
+        arrayOf(-1, 0, 1, 2, 3, 4, 5, 6, 7 , 8 , 9)
+
+    var fibVals: Array<Int> =
+        arrayOf( 0, 0, 1, 1, 2, 3, 5, 8, 13, 21, 34)
+
+
     @Test
     fun testFib() {
-        assertEquals(3, fib(4))
+        fibKeys.forEachIndexed { index, key ->
+            assertEquals(fibVals[index], fib(key))
+        }
     }
 
     @Test
@@ -19,14 +38,9 @@ class TestFibonacci {
 
     @Test
     fun testFibVector() {
-        assertEquals(0, fibVector(-1))
-        assertEquals(0, fibVector(0))
-        assertEquals(1, fibVector(1))
-        assertEquals(1, fibVector(2))
-        assertEquals(2, fibVector(3))
-        assertEquals(3, fibVector(4))
-        assertEquals(5, fibVector(5))
-        assertEquals(8, fibVector(6))
+        fibKeys.forEachIndexed { index, key ->
+            assertEquals(fibVals[index], fibVector(key))
+        }
     }
 
     @Test
@@ -38,25 +52,67 @@ class TestFibonacci {
 
     @Test
     fun testFibDp() {
-        assertEquals(0, fibDp(-1))
-        assertEquals(0, fibDp(0))
-        assertEquals(1, fibDp(1))
-        assertEquals(1, fibDp(2))
-        assertEquals(2, fibDp(3))
-        assertEquals(3, fibDp(4))
-        assertEquals(5, fibDp(5))
-        assertEquals(8, fibDp(6))
+        fibKeys.forEachIndexed { index, key ->
+            assertEquals(fibVals[index], fibMemorandumFromTopdown(key))
+        }
     }
 
     @Test
     fun testFibDpReduce() {
-        assertEquals(0, fibDpReduce(-1))
-        assertEquals(0, fibDpReduce(0))
-        assertEquals(1, fibDpReduce(1))
-        assertEquals(1, fibDpReduce(2))
-        assertEquals(2, fibDpReduce(3))
-        assertEquals(3, fibDpReduce(4))
-        assertEquals(5, fibDpReduce(5))
-        assertEquals(8, fibDpReduce(6))
+        fibKeys.forEachIndexed { index, key ->
+            assertEquals(fibVals[index], fibDpReduce(key))
+        }
+    }
+
+//    @Test
+//    fun runBenchmarks() {
+//        val options = OptionsBuilder()
+//            .include(this.javaClass.name + ".*")
+//            .mode(Mode.AverageTime)
+//            .warmupTime(TimeValue.seconds(1))
+//            .warmupIterations(6)
+//            .threads(1)
+//            .measurementIterations(6)
+//            .forks(1)
+//            .shouldFailOnError(true)
+//            .shouldDoGC(true)
+//            .build()
+//
+//        Runner(options).run()
+//    }
+
+    @Test
+    fun testMyFib() {
+        fibKeys.forEachIndexed { index, key ->
+            assertEquals(fibVals[index], Fib.fib(key))
+        }
+    }
+
+    @Test
+    fun testMyFibPrune() {
+        fibKeys.forEachIndexed { index, key ->
+            assertEquals(fibVals[index], Fib.fibPrune(key))
+        }
+    }
+
+    @Test
+    fun testMyFibMemorandum() {
+        fibKeys.forEachIndexed { index, key ->
+            assertEquals(fibVals[index], Fib.fibMemorandumFromTopdown(key))
+        }
+    }
+
+    @Test
+    fun testMyFibDynamicPlanning() {
+        fibKeys.forEachIndexed { index, key ->
+            assertEquals(fibVals[index], Fib.fibDpFromDowntop(key))
+        }
+    }
+
+    @Test
+    fun testMyFibStateCompression() {
+        fibKeys.forEachIndexed { index, key ->
+            assertEquals(fibVals[index], Fib.fibDpStateCompression(key))
+        }
     }
 }

@@ -22,10 +22,13 @@
 plugins {
     application
     kotlin("jvm") version "1.4.20"
+    // java micro-benchmarking harness (https://github.com/melix/jmh-gradle-plugin)
+    id("me.champeau.gradle.jmh") version "0.5.2"
 }
 
 apply {
     plugin("kotlin")
+    plugin("me.champeau.gradle.jmh")
 }
 
 
@@ -54,7 +57,7 @@ dependencies {
     // Use the Kotlin test library.
     testImplementation("org.jetbrains.kotlin:kotlin-test")
 
-    // junit 5 run platfrom
+    // junit 5 run platform
     testImplementation("org.junit.platform:junit-platform-runner:1.6.2")
     // junit 5
     testImplementation("org.junit.jupiter:junit-jupiter:5.6.2")
@@ -62,6 +65,18 @@ dependencies {
     testRuntimeOnly("org.junit.platform:junit-platform-launcher:1.6.2")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.6.2")
     testRuntimeOnly("org.junit.vintage:junit-vintage-engine:5.6.2")
+
+    // benchmark of code
+    implementation("org.openjdk.jmh:jmh-core:1.25")
+
+    testImplementation("org.openjdk.jmh:jmh-core:1.25")
+    //testImplementation("org.openjdk.jmh:jmh-generator-annprocess:1.25")
+    testAnnotationProcessor("org.openjdk.jmh:jmh-generator-annprocess:1.25")
+
+    jmh(kotlin("stdlib"))
+    jmh("org.openjdk.jmh:jmh-core:1.25")
+    jmh("org.openjdk.jmh:jmh-generator-annprocess:1.25")
+
 }
 
 // $ gradle wrapper --gradle-version 6.4.1
@@ -85,5 +100,16 @@ tasks {
     }
 }
 
+jmh {
+    duplicateClassesStrategy = DuplicatesStrategy.EXCLUDE
+    include = mutableListOf("kt\\.algo\\.fibonacci\\.JmhFibonacci.*")
+    jmhVersion = "1.25"
+    humanOutputFile = null
+    warmupIterations = 1
+    iterations = 1
+
+//    zip64 = true
+//    includeTests = true
+}
 
 

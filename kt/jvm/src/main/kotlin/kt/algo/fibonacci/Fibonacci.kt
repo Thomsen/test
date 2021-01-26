@@ -37,7 +37,7 @@ private fun vectorHelper(memo: IntArray, n: Int): Int {
 /**
  * bottom up
  */
-fun fibDp(n: Int): Int {
+fun fibMemorandumFromTopdown(n: Int): Int {
     if (n < 1) return 0
     val dp = IntArray(n + 1) { 0 }
     if (n > 0) dp[1] = 1

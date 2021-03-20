@@ -1,9 +1,8 @@
-package kt.algo.retrospective
+package kt.algo.backtrack
 
-import kt.parser.num
 import java.util.*
 
-class FullAlign {
+class FullAlignment {
 
     var res = LinkedList<List<Int?>>()
 

@@ -53,6 +53,7 @@ dependencies {
 
     // gson
     implementation("com.google.code.gson:gson:2.8.6")
+    implementation("org.junit.jupiter:junit-jupiter:5.4.2")
 
     // Use the Kotlin test library.
     testImplementation("org.jetbrains.kotlin:kotlin-test")

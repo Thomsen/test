@@ -17,5 +17,9 @@ web/node/**/build
 */**/.packages
 *.beam
 
+py/venv
 */**/__pycache__
 */**/*.pyc
+
+*.DS_Store
+.idea

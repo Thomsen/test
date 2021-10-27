@@ -23,3 +23,7 @@ py/venv
 
 *.DS_Store
 .idea
+
+**/.settings
+**/.project
+**/.classpath

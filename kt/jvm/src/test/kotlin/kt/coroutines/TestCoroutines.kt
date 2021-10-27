@@ -42,6 +42,8 @@ class TestCoroutines {
         }
 //        Thread.sleep(4000)
         println("three")
+
+        Thread.sleep(3000)
     }
 
     @Test

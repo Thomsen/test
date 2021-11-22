@@ -1,6 +1,7 @@
 package kt.coroutines
 
 import kotlinx.coroutines.*
+import kt.basic.*
 import org.junit.Test
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
@@ -9,21 +10,32 @@ import kotlin.concurrent.thread
 class TestCoroutines {
 
     @Test
-    fun exampleBlocking() {
-        GlobalScope.launch {
-            delay(1000)
-            println("five")
-        }
-        GlobalScope.launch {
-            delay(3000)
-            println("four")
-        }
-        println("one")
+    fun testGlobal() {
+        exampleGlobal()
+    }
+
+    @Test
+    fun testBlocking() {
+        exampleBlocking()
+    }
+
+    @Test
+    fun testCoroutineScope() {
         runBlocking {
-            printDelayed("two")
+            exampleCoroutineScope()
         }
-//        Thread.sleep(4000)
-        println("three")
+    }
+
+    @Test
+    fun testCoroutineScope2() {
+        runBlocking {
+            exampleCoroutineScope2()
+        }
+    }
+
+    @Test
+    fun testBlockingAndScope() {
+        exampleBlockingAndScope()
     }
 
     @Test
@@ -44,13 +56,6 @@ class TestCoroutines {
         println("three")
 
         Thread.sleep(3000)
-    }
-
-    @Test
-    fun exampleblocking2() = runBlocking {
-        println("one")
-        println("two")
-        println("three")
     }
 
     @Test

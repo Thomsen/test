@@ -12,18 +12,35 @@ fun main() = runBlocking {
     // observe values
     val job = launch {
         stateFlow.collect {
-            print("$it ")
+            println("job1 $it")
+        }
+    }
+
+    val job2 = launch {
+        stateFlow.collect {
+            // 0 1 2 3 4 5
+            println("job2 $it")
         }
     }
 
     // change values
     (1..5).forEach { it ->
         delay(500)
-        stateFlow.value = it // 0 1 2 3 4
+        stateFlow.value = it // 1 2 3 4 5
         // value = 1 // 0 1
     }
 
-    // cancel running job
-    job.cancel()
+    // maybe don't print 0 1 2 3 4
+    val job3 = launch {
+        stateFlow.collect {
+            println("job3 $it")
+        }
+    }
+
+    // wait running job
     job.join()
+
+    job2.join()
+
+    job3.join()
 }

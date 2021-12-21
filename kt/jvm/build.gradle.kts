@@ -49,6 +49,7 @@ dependencies {
     implementation(kotlin("stdlib"))
     implementation("io.reactivex.rxjava3:rxkotlin:3.0.0")
 
+    implementation("org.jetbrains.kotlin:kotlin-reflect:1.4.20")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.3")
 
     // gson

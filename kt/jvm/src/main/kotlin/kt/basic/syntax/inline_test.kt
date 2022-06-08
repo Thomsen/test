@@ -47,6 +47,15 @@ class Name(val n: String): Printable {
     }
 }
 
+@JvmInline
+value class NameV(val n: String): Printable {
+    override fun prettyPrint(): String {
+        val it = "let's $n!"
+        println(it)
+        return it
+    }
+}
+
 fun main() {
     println(plus(3, 4))
 //    int var0 = plus(3, 4);
@@ -66,4 +75,36 @@ fun main() {
 //    System.out.println(var6);
 
     Name("t").prettyPrint()
+    NameV("tt").prettyPrint()
+//    (new Name("t")).prettyPrint();
+//    NameV.prettyPrint-impl(NameV.constructor-impl("tt"));
+
 }
+
+// noinline
+//inline fun higherOrderFunction(aLambda: () -> Unit, noinline dontInlineLambda: () -> Unit, aLambda2: () -> Unit) {
+//
+//    doSomething()
+//
+//    aLambda()
+//    dontInlineLambda()//won't be inlined.
+//    aLambda2()
+//
+//    doAnotherThing()
+//
+//}
+
+// crossinline
+//inline fun higherOrderFunction(crossinline aLambda: () -> Unit) {
+//
+//    normalFunction {
+//        aLambda() //must mark aLambda as crossinline to use in this context.
+//    }
+//
+//}
+//
+//fun normalFunction(aLambda: () -> Unit) {
+//
+//    return
+//
+//}

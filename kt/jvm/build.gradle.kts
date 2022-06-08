@@ -21,9 +21,10 @@
 
 plugins {
     application
-    kotlin("jvm") version "1.4.20"
+    kotlin("jvm") version "1.6.21"
     // java micro-benchmarking harness (https://github.com/melix/jmh-gradle-plugin)
     id("me.champeau.gradle.jmh") version "0.5.2"
+    //id("org.jetbrains.kotlin.jvm") version "1.6.21"
 }
 
 apply {
@@ -31,10 +32,16 @@ apply {
     plugin("me.champeau.gradle.jmh")
 }
 
+tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
+    kotlinOptions {
+        // context receivers
+        freeCompilerArgs = listOf("-Xcontext-receivers")
+
+    }
+}
 
 repositories {
     google()
-    jcenter()
     mavenCentral()
 }
 
@@ -55,6 +62,9 @@ dependencies {
     // gson
     implementation("com.google.code.gson:gson:2.8.6")
     implementation("org.junit.jupiter:junit-jupiter:5.4.2")
+
+    // jackson
+    implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.13.+")
 
     // okhttp
     implementation(platform("com.squareup.okhttp3:okhttp-bom:4.9.0"))

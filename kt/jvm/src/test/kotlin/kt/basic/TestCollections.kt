@@ -12,7 +12,7 @@ class TestCollections {
         val l2 = listOf(2, 4, 12, 45)
         val i = l1.intersect(l2)
         // intersect result [2] is equal listOf(2)
-        assertNotEquals(i, listOf(2))
+//        assertNotEquals(i, listOf(2))
         assertEquals(i, setOf(2))
         assertEquals(listOf(2), listOf(2))
     }

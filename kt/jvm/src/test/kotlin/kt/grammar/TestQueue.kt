@@ -4,6 +4,7 @@ import kt.parser.num
 import org.junit.Before
 import org.junit.Test
 import java.util.*
+import java.util.Collection
 import kotlin.test.assertEquals
 
 class TestQueue {
@@ -17,37 +18,37 @@ class TestQueue {
 
     @Test
     fun testInit() {
-        assertEquals(listOf(1, 2, 3, 4), nums)
+        assertEquals(listOf(1, 2, 3, 4), nums.toList())
     }
 
     @Test
     fun testAdd() {
         nums.add(5)
-        assertEquals(listOf(1, 2, 3, 4, 5), nums)
+        assertEquals(listOf(1, 2, 3, 4, 5), nums.toList())
     }
 
     @Test
     fun testRemove() {
         assertEquals(1, nums.remove())
-        assertEquals(listOf(2, 3, 4), nums)
+        assertEquals(listOf(2, 3, 4), nums.toList())
     }
 
     @Test
     fun testPoll() {
         assertEquals(1, nums.poll())
-        assertEquals(listOf(2, 3, 4), nums)
+        assertEquals(listOf(2, 3, 4), nums.toList())
     }
 
     @Test
     fun testPeek() {
         assertEquals(1, nums.peek())
-        assertEquals(listOf(1, 2, 3, 4), nums)
+        assertEquals(listOf(1, 2, 3, 4), nums.toList())
     }
 
     @Test
     fun testOffer() {
         assertEquals(true, nums.offer(5))
-        assertEquals(listOf(1, 2, 3, 4, 5), nums)
+        assertEquals(listOf(1, 2, 3, 4, 5), nums.toList())
     }
 
 

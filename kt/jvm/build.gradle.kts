@@ -34,6 +34,8 @@ apply {
 
 tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
     kotlinOptions {
+        // 'compileTestJava' task (current target is 11) and 'compileTestKotlin' task (current target is 1.8)
+        jvmTarget = "11"
         // context receivers
         freeCompilerArgs = listOf("-Xcontext-receivers")
 
@@ -76,6 +78,14 @@ dependencies {
 
     // Use the Kotlin test library.
     testImplementation("org.jetbrains.kotlin:kotlin-test")
+    // test coroutines runTest
+    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.2")
+
+    // small testing library for kotlinx.coroutines Flow
+    testImplementation("app.cash.turbine:turbine:0.8.0")
+    // shouldBe
+    testImplementation("org.amshove.kluent:kluent:1.68")
+
 
     // junit 5 run platform
     testImplementation("org.junit.platform:junit-platform-runner:1.6.2")

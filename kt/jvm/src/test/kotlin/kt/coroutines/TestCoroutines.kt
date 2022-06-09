@@ -1,11 +1,15 @@
 package kt.coroutines
 
 import kotlinx.coroutines.*
+import kotlinx.coroutines.test.UnconfinedTestDispatcher
+import kotlinx.coroutines.test.runTest
 import kt.basic.*
 import org.junit.Test
+import org.junit.jupiter.api.Assertions
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 import kotlin.concurrent.thread
+import kotlin.test.assertTrue
 
 class TestCoroutines {
 
@@ -235,5 +239,28 @@ class TestCoroutines {
     fun testSupervisorJob() {
         //val scope = CoroutineScope(Dispatchers.Main + SupervisorJob() + handler)
     }
+
+    @Test
+    fun `eager execution with UnconfinedTestDispatcher`() = runTest(UnconfinedTestDispatcher()) {
+        var called = false
+        launch {
+            called = true
+        }
+
+        assertTrue(called)
+    }
+
+    @Test
+    fun `no eager excecution with UnconfinedTestDispatcher on lazy start`() =
+        runTest(UnconfinedTestDispatcher()) {
+            var called = false
+            val job = launch(start = CoroutineStart.LAZY) {
+                called = true
+            }
+            Assertions.assertFalse(called)
+
+            job.join()
+            assertTrue(called)
+        }
 
 }

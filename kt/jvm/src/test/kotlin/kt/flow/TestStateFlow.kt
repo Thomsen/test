@@ -1,19 +1,15 @@
 package kt.flow
 
-import kotlinx.coroutines.CoroutineStart
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.toList
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
-import kotlinx.coroutines.test.UnconfinedTestDispatcher
+import kotlinx.coroutines.test.advanceTimeBy
+import kotlinx.coroutines.test.advanceUntilIdle
+import kotlinx.coroutines.test.runCurrent
 import kotlinx.coroutines.test.runTest
-import kotlinx.coroutines.withTimeoutOrNull
 import org.junit.Test
-import org.junit.jupiter.api.Assertions.assertFalse
 import kotlin.test.assertEquals
-import kotlin.test.assertTrue
 
 class TestStateFlow {
 
@@ -26,9 +22,16 @@ class TestStateFlow {
         val testResults = mutableListOf<Int>()
 
         val job = launch {
-            _counter.toList(testResults)
+            counter.toList(testResults)
         }
-        _counter.value = 5
+//        _counter.value = 5
+        launch {
+            _counter.value = 5
+        }
+
+//        runCurrent()
+//        advanceTimeBy(1000)
+        advanceUntilIdle() // Yields to perform the registrations
 
         assertEquals(2, testResults.size)
         assertEquals(0, testResults.first())

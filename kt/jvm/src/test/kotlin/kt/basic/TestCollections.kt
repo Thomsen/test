@@ -2,7 +2,6 @@ package kt.basic
 
 import org.junit.Test
 import kotlin.test.assertEquals
-import kotlin.test.assertNotEquals
 
 class TestCollections {
 

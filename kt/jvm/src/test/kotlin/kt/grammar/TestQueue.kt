@@ -1,10 +1,8 @@
 package kt.grammar
 
-import kt.parser.num
 import org.junit.Before
 import org.junit.Test
 import java.util.*
-import java.util.Collection
 import kotlin.test.assertEquals
 
 class TestQueue {

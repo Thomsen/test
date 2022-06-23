@@ -11,6 +11,7 @@ import java.util.concurrent.Executors
 import kotlin.concurrent.thread
 import kotlin.test.assertTrue
 
+@ExperimentalCoroutinesApi
 class TestCoroutines {
 
     @Test

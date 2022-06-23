@@ -2,13 +2,9 @@ package kt.flow
 
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.*
-import kotlinx.coroutines.test.UnconfinedTestDispatcher
-import kotlinx.coroutines.test.runTest
-import kt.parser.num
 import org.junit.Test
 import kotlin.system.measureTimeMillis
 import kotlin.test.assertEquals
-import kotlin.test.assertTrue
 
 class TestFlow {
 
@@ -163,6 +159,7 @@ class TestFlow {
     }
 
     @Test
+    @FlowPreview  // flatMapConcat @FlowPreview
     fun testFlatMapConcat() = runBlocking {
         val startTime = System.currentTimeMillis()
         (1..3).asFlow().onEach { delay(100) }
@@ -173,6 +170,7 @@ class TestFlow {
     }
 
     @Test
+    @FlowPreview
     fun testFlatMapMerge() = runBlocking {
         val startTime = System.currentTimeMillis()
         (1..3).asFlow().onEach { delay(100) }
@@ -183,6 +181,7 @@ class TestFlow {
     }
 
     @Test
+    @ExperimentalCoroutinesApi
     fun testFlatMapLatest() = runBlocking {
         val startTime = System.currentTimeMillis()
         (1..3).asFlow().onEach { delay(100) }

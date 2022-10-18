@@ -56,6 +56,12 @@ value class NameV(val n: String): Printable {
     }
 }
 
+typealias NameTypeAlias = String
+@JvmInline
+value class NameInlineClass(val s: String)
+// 内联类引入了一个真实的新类型
+// 类型别名仅仅是为现有的类型取了个新的替代名称
+
 fun main() {
     println(plus(3, 4))
 //    int var0 = plus(3, 4);

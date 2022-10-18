@@ -1,9 +1,7 @@
 package kt.basic
 
-import kt.basic.sam.Producer
-import kt.basic.sam.Producer0
-import kt.basic.sam.produceNew
-import kt.basic.sam.produceNew0
+import kt.basic.sam.*
+import org.amshove.kluent.shouldBe
 import org.junit.Test
 import kotlin.test.assertEquals
 
@@ -21,5 +19,15 @@ class TestSam {
     fun testProducer() {
         val p = produceNew(Producer { 6 })
         assertEquals(6, p)
+    }
+
+    @Test
+    fun testEven0() {
+        isEven0.accept(7) shouldBe false
+    }
+
+    @Test
+    fun testEven() {
+        isEven.calc(8) shouldBe true
     }
 }

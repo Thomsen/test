@@ -24,7 +24,7 @@ public class GenericExtend {
         // All objects, including arrays, implement the methods of this class.
 //        Source<Object> objs = strs;  // compile error
 
-        Source<? extends Object> objs = strs;
+        Source<? extends Object> objs = strs;  // 通配符类型 ? extends Object
     }
 }
 

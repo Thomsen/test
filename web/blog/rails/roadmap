@@ -1,0 +1,148 @@
+< rails 7.0.4 >
+
+1. edit config/routes.rb 
+get "/articles", to: "articles#index"
+
+2. generate
+bin/rails generate controller Articles index --skip-routes
+
+3.
+bin/rails generate model Article title:string body:text
+bin/rails db:migrate
+
+4.
+$ bin/rails console
+irb> article = Article.new(title: "Hello Rails", body: "I am on Rails!")
+irb> article.save
+
+5.
+$ bin/rails routes
+
+6. new and update article
+
+7. second comment model
+> bin/rails generate model Comment commenter:string body:text article:references
+> bin/rails db:migrate
+> bin/rails generate controller Comments
+
+8. refactor ...
+
+bin/rails server
+
+
+< rails 4.1.4 >
+
+< rails 3.2.3 >
+
+$ rails new r323
+$ rails server
+fix error
+$ gem install execjs
+$ gem install therubyracer
+download node.js source
+configure to make install
+
+config user fro postgresql
+$ adduser thom
+$ psswd thom
+$ su - postgres(develop)
+$ psql tempplate1 (or psql -d template1 -u postgres)
+- create user thom with password 'pass';
+- create database demodb
+- grant all privileges on database demodb to thom;
+(or createuser createdb command)
+
+
+
+< rails 2.2.3 >
+
+create new project
+$ rails blog (or ralis blog -d postgresql)
+
+configuring a database
+$ cd blog
+$ vi config/database.yml
+
+install postgresql
+$ sudo apt-get install postgresql
+$ sudo passwd postgres
+(develop)
+$ su postgres
+$ psql
+
+install postgresql adapter (activerecord-postgresql-adapter)
+$ sudo apt-get install libpqxx-dev (c++ library to connect to postgresql)
+$ sudo gem install pg
+
+switch user of database.yml 
+
+$ rake db:create
+
+connect database
+$ psql database_name
+database_name=# \db
+database_name=# \d
+
+start server
+$ ruby script/server (need user of database.yml)
+
+say "hello"
+$ ruby script/generate controller home index
+
+set app home
+$ mv public/index.html public/index.hml.bak
+$ vi config/routes.rb
+
+quickly with scaffolding
+$ ruby script/generate scaffold Post name:string title:string content:text
+
+$ rake db:migrate
+
+add validation (diff rails 3)
+$ vi app/models/post.rb
+
+use console
+$ ruby script/console (need user)
+Post.create (ralis Post.new)
+
+list all posts
+
+debug
+$ vi app/views/posts/show.html.erb
+
+ruby-debug
+$ gem install ruby-debug 
+$ vi config/environments/development.rb (not need --debugger)
+$ vi app/controller/posts_controller.rb
+$ ruby script/server --debugger
+you can rdb in console
+(rdb ) help 
+
+logger
+$ vi config/environment.rb (or environment file, common up)
+$ vi app/controllers/posts_controller.rb (sending messages)
+look the log/environment_name.log (message)
+
+debugging memory leaks
+$ gem install break_house
+$ vi config/environment.rb
+$ RAILS_ENV=production BLEAK_HOUSE=1 ruby-bleak-house script/server
+
+add a second model
+:! script/generate model Comment commenter:string body:text post:references (in vim)
+:! rake db:migrate (but need postgres user)
+edit post.rb
+edit config/routes.rb
+generate controller 
+code
+
+use partials to eliminate view
+add app/views/posts/_form_.html.erb
+modify app/views/posts/
+
+# postgresql
+$ createuser -a thom
+$ create database thom encoding 'utf-8' template template0 owner thom tablespace;
+$ createdb thom --encoding utf-8 --template template0 --owner thom --tablespace thomspace;
+use default user
+

@@ -73,6 +73,10 @@ dependencies {
     implementation("com.squareup.okhttp3:okhttp")
     implementation("com.squareup.okhttp3:logging-interceptor")
 
+    // arrow
+    implementation(platform("io.arrow-kt:arrow-stack:1.0.1"))
+    implementation("io.arrow-kt:arrow-core")
+
     // jol
     implementation("org.openjdk.jol:jol-core:0.16")
 

@@ -1,7 +1,5 @@
 package http;
 
-import sun.plugin2.message.Message;
-
 import javax.net.ssl.*;
 import javax.security.auth.Subject;
 import javax.swing.*;

@@ -1,7 +1,5 @@
 package thread;
 
-import com.sun.deploy.util.StringUtils;
-import sun.swing.StringUIClientPropertyKey;
 import thread.RunnableTest;
 
 import java.util.concurrent.CountDownLatch;

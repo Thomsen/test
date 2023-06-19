@@ -1,6 +1,6 @@
-package kt.basic.syntax
+package kt.inline
 
-
+import java.util.*
 
 fun plus(a: Int, b: Int) = a + b
 //public static final int plus(int a, int b) {
@@ -19,6 +19,12 @@ inline fun times(a: Int, b: Int) = a * b
 fun div(a: Int, b: Int) = a / b
 
 fun mod(a: Int, b: Int) = a % b
+
+inline fun plusOne(vararg elements: Int): List<Int> {
+    val array = elements
+    val plusOneA = array.map {  it + 1 }
+    return plusOneA
+}
 
 // Cannot check for instance of erased type: T
 //fun <T> isS(value: Any) = value is T
@@ -56,36 +62,17 @@ value class NameV(val n: String): Printable {
     }
 }
 
+inline class NameN(val name: String) {
+    val parsed: String
+        get() = name.uppercase(Locale.getDefault()).filterIndexed { index, c -> index == 0 }
+}
+
 typealias NameTypeAlias = String
 @JvmInline
 value class NameInlineClass(val s: String)
 // 内联类引入了一个真实的新类型
 // 类型别名仅仅是为现有的类型取了个新的替代名称
 
-fun main() {
-    println(plus(3, 4))
-//    int var0 = plus(3, 4);
-
-    println(times(3, 4))
-//    byte a$iv = 3;
-//    int b$iv = 4;
-//    int $i$f$times = false;
-//    var0 = a$iv * b$iv;
-
-    println(isA<String>("abc"))  		// true
-    println(isA<String>(123)) 		// false
-//    Object value$iv = "abc";
-//    $i$f$isA = false;
-//    boolean var6 = true;
-//    $i$f$isA = false;
-//    System.out.println(var6);
-
-    Name("t").prettyPrint()
-    NameV("tt").prettyPrint()
-//    (new Name("t")).prettyPrint();
-//    NameV.prettyPrint-impl(NameV.constructor-impl("tt"));
-
-}
 
 // noinline
 //inline fun higherOrderFunction(aLambda: () -> Unit, noinline dontInlineLambda: () -> Unit, aLambda2: () -> Unit) {

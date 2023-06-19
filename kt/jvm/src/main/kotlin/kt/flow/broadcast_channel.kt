@@ -6,7 +6,7 @@ import kotlinx.coroutines.channels.ReceiveChannel
 import kotlinx.coroutines.flow.consumeAsFlow
 import kotlinx.coroutines.runBlocking
 
-fun main() {
+fun broadcast() {
 
     runBlocking {
         val broadcastChannel = BroadcastChannel<String>(Channel.BUFFERED)

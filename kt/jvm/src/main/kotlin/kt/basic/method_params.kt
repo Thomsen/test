@@ -14,7 +14,7 @@ fun son(hello: (() -> Unit)?) {
     }
 }
 
-fun main() {
+fun invokeMethod() {
     people ({ say() })
     people { say() }
 

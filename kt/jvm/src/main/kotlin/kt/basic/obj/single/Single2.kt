@@ -53,8 +53,3 @@ class Single22 private constructor() {
         }
     }
 }
-
-fun main() {
-    val single2 = Single2()
-    single2.testThread()
-}

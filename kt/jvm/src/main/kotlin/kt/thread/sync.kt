@@ -5,7 +5,7 @@ import thread.MuReentrantLock
 import java.util.concurrent.locks.ReentrantLock
 import kotlin.concurrent.thread
 
-fun main() {
+fun syncThread() {
     thread(name = "Thread1") {
         val test = Test1(Thread.currentThread().name)
         test.deadLock()

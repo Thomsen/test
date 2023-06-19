@@ -2,8 +2,14 @@ package kt.basic
 
 import org.amshove.kluent.shouldBeEqualTo
 import org.junit.Test
+import kotlin.test.assertEquals
 
 class TestPowerful {
+
+    @Test
+    fun acceptTestCases() {
+        assertEquals(1, 1)
+    }
 
     @Test
     fun testMagnitude() {

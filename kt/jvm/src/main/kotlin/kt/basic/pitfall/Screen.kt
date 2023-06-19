@@ -55,7 +55,7 @@ class ResolutionScreen: AspectRatioScreen() {
     }
 }
 
-fun main() {
+fun printScreenInfo() {
     val screen = ResolutionScreenFall()
     println("Screen resolution fall: ${screen.width}x${screen.height}, " +
         "ratio: ${screen.aspectRatio}")

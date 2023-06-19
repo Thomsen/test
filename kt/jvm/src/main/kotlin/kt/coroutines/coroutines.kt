@@ -1,11 +1,7 @@
-package kt.basic
+package kt.coroutines
 
 import kotlinx.coroutines.*
 
-
-fun main() {
-    exampleGlobal()
-}
 
 fun exampleGlobal() {
     GlobalScope.launch {

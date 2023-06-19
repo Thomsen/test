@@ -31,7 +31,7 @@ fun foo(p: Map<String, Any>): Flow<Map<String, *>> =
     }
 
 
-fun main() {
+fun coldHot() {
     // cold
     runBlocking {
         flow {

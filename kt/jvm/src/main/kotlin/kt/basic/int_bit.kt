@@ -1,6 +1,6 @@
 package kt.basic
 
-fun main() {
+fun printBitInfo() {
     println("UNSPECIFIED = $UNSPECIFIED")   // 0
     println("EXACTLY = $EXACTLY")           // 1073741824
     println("AT_MOST = $AT_MOST")           // -2147483648

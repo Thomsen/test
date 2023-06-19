@@ -9,7 +9,7 @@ fun createTree(): BinaryTree {
     return BinaryTree(rootNode)
 }
 
-fun main() {
+fun treeTraverse() {
     val tree = createTree()
 
     print("front traverse: ")

@@ -1,11 +1,11 @@
-package rx
+package kt.rx
 
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.functions.BiFunction
 import io.reactivex.rxjava3.kotlin.Observables
 import io.reactivex.rxjava3.subjects.PublishSubject
 
-fun main(args: Array<String>) {
+fun combineLatest() {
 
     val name = PublishSubject.create<String>()
 

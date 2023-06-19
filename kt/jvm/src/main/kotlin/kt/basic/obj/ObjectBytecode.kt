@@ -1,7 +1,7 @@
 package kt.basic.obj
 
 class ObjectBytecode {
-    fun main(args: Array<String>) {
+    fun bytecode(args: Array<String>) {
         val o = Obj()
     }
 }

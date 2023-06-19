@@ -3,7 +3,7 @@ package kt.rx
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.subjects.PublishSubject
 
-fun main() {
+fun empty() {
     val upstream = PublishSubject.create<Int>()
     upstream.doOnDispose { println("Uh, the upstream gets disposed") } // This log will never print.
 

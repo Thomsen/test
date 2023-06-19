@@ -19,9 +19,3 @@ class HttpExample {
 //        File("").readLines().forEach { println(it) }
     }
 }
-
-fun main() {
-    val httpClient = HttpExample()
-    val response = httpClient.run("https://raw.github.com/square/okhttp/master/README.md")
-    println(response)
-}

@@ -33,10 +33,3 @@ fun printfRec() {
     }
 }
 
-fun main() {
-    val dp = with(Context()) {
-        px2dp(100)
-    }
-    println(dp)
-}
-

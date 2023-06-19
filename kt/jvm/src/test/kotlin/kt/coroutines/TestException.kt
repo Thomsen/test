@@ -7,7 +7,7 @@ import java.io.IOException
 class TestException {
 
     @Test
-    fun testMain() {
+    fun `test scope exception`() {
         runBlocking {
             val job = GlobalScope.launch {
                 println("Throwing exception from launch")

@@ -6,7 +6,7 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 
-fun main() = runBlocking {
+fun sharedFlow() = runBlocking {
      val sharedFlow = MutableSharedFlow<Int>(replay = 3, extraBufferCapacity = 0)
 
      // observe values

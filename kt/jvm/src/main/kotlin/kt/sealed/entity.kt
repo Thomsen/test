@@ -91,7 +91,7 @@ fun EntitySealed.Medium.printInfo() {
 val EntitySealed.Medium.info: String
     get() = "some info"
 
-fun main() {
+fun printEntity() {
     val entity = Entity.Factory.create()
     Entity.id
 

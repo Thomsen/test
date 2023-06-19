@@ -4,7 +4,7 @@ import java.util.concurrent.Callable
 import java.util.concurrent.Executors
 import java.util.concurrent.Future
 
-class TestThread: Thread() {
+class ThreadCreate: Thread() {
     override fun run() {
         super.run()
         println("thread 1")
@@ -12,8 +12,8 @@ class TestThread: Thread() {
 }
 
 
-fun main() {
-    val th1 = TestThread()
+fun create() {
+    val th1 = ThreadCreate()
     th1.start()
 
     // Thread(Runnable) lambda

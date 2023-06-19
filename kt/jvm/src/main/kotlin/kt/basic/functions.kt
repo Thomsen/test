@@ -20,7 +20,7 @@ fun getPrintPredicated(): (String) -> Boolean {
     return { it.startsWith("D") }
 }
 
-fun main() {
+fun invokeFunc() {
     val list = listOf("Kotlin", "Java", "Dart", "JavaScript")
 
     printFilteredString(list) {

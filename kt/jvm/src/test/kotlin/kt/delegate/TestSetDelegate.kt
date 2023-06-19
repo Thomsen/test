@@ -1,8 +1,5 @@
-package kt.advance
+package kt.delegate
 
-import kt.basic.syntax.CountingSet1
-import kt.basic.syntax.CountingSet2
-import kt.basic.syntax.CountingSet3
 import org.junit.Test
 import kotlin.test.assertEquals
 

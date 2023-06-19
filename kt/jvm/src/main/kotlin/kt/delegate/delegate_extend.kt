@@ -1,10 +1,10 @@
-package kt.basic.syntax
+package kt.delegate
 
 interface Base {
     fun print()
 
-    fun printMessage()
-    fun printMessageLine()
+    fun printMessage(): String
+    fun printMessageLine(): String
 
     val message: String
 
@@ -13,8 +13,14 @@ interface Base {
 class BaseImpl(val x: Int) : Base {
     override fun print() { print(message) }
 
-    override fun printMessage() { print(x) }
-    override fun printMessageLine() { println(x) }
+    override fun printMessage(): String {
+        print(x)
+        return message
+    }
+    override fun printMessageLine(): String {
+        println(x)
+        return "$message\n"
+    }
 
     override val message = "BaseImpl: x = $x"
 

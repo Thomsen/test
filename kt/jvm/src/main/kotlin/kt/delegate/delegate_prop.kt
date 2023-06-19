@@ -1,11 +1,10 @@
-package kt.advance
+package kt.delegate
 
-import org.junit.Test
 import kotlin.properties.Delegates
 import kotlin.properties.ReadWriteProperty
 import kotlin.reflect.KProperty
 
-class TestDelegate {
+class DelegateProp {
 
     init {
         println("class initialized")
@@ -57,14 +56,4 @@ class TestDelegate {
         }
 
     }
-
-    @Test
-    fun testDelegate() {
-        verifiedProp = 66
-        println(verifiedProp)
-
-        customDelegated = 550
-        println(customDelegated)
-    }
-
 }

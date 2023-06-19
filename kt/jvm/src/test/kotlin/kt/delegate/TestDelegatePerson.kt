@@ -1,13 +1,9 @@
-package kt.advance
+package kt.delegate
 
-import kt.basic.syntax.PersonThree
-import kt.basic.syntax.Superhero
-import kt.basic.syntax.SuperheroThree
-import kt.basic.syntax.SuperheroTwo
 import org.junit.Test
 import kotlin.test.assertEquals
 
-class TestPersonDelegate {
+class TestDelegatePerson {
 
     @Test
     fun testSuperheroOne() {

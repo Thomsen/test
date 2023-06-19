@@ -1,4 +1,4 @@
-package kt.basic.syntax
+package kt.delegate
 
 import kotlin.reflect.KProperty
 

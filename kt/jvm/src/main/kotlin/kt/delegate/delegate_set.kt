@@ -1,4 +1,4 @@
-package kt.basic.syntax
+package kt.delegate
 
 // inheritance ( is-a )
 class CountingSet1<T>: HashSet<T>() {

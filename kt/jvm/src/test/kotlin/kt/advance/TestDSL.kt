@@ -2,15 +2,16 @@ package kt.advance
 
 import org.junit.Test
 import java.time.LocalDateTime
+import kotlin.time.Duration.Companion.days
+import kotlin.time.DurationUnit
 import kotlin.time.ExperimentalTime
-import kotlin.time.days
 
 class TestDSL {
 
     @Test
     @ExperimentalTime
     fun testDate() {
-        val yesterday = 1.days.inDays
+        val yesterday = 1.days.toDouble(DurationUnit.DAYS)
         println(yesterday)
     }
 

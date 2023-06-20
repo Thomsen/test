@@ -21,7 +21,7 @@
 
 plugins {
     application
-    kotlin("jvm") version "1.6.21"
+    kotlin("jvm") version "1.8.21"
     // java micro-benchmarking harness (https://github.com/melix/jmh-gradle-plugin)
     id("me.champeau.gradle.jmh") version "0.5.2"
     //id("org.jetbrains.kotlin.jvm") version "1.6.21"
@@ -83,7 +83,7 @@ dependencies {
     // Use the Kotlin test library.
     testImplementation("org.jetbrains.kotlin:kotlin-test")
     // test coroutines runTest
-    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.2")
+    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.1")
 
     // small testing library for kotlinx.coroutines Flow
     testImplementation("app.cash.turbine:turbine:0.8.0")

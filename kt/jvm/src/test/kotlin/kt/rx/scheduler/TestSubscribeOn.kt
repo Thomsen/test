@@ -14,7 +14,7 @@ class TestSubscribeOn {
         Observable.just(1)
             .map(object : io.reactivex.rxjava3.functions.Function<Int, Any>{
                 @Throws(Exception::class)
-                override fun apply(@NonNull integer: Int?): Int? {
+                override fun apply(@NonNull integer: Int): Any {
                     println("map-1: $integer " + Thread.currentThread().name)
                     return integer
                 }

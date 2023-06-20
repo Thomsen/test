@@ -46,7 +46,7 @@ class TestError {
         val numbers =
             Observable.generate(
                 Supplier { 1 },
-                BiFunction { state: Int, emitter: Emitter<Int?> ->
+                BiFunction { state: Int, emitter: Emitter<Int> ->
                     emitter.onNext(state)
                     state + 1
                 }
@@ -159,7 +159,6 @@ class TestError {
                     "onError: " + error.message
                 )
             }
-        assert(disposable != null)
     }
 
     @Test
@@ -178,8 +177,8 @@ class TestError {
                     )
                 }
 
-        val disposable = source.retryWhen { errors: Observable<Throwable?> ->
-            errors.map { error: Throwable? -> 1 } // Count the number of errors.
+        val disposable = source.retryWhen { errors: Observable<Throwable> ->
+            errors.map { error: Throwable -> 1 } // Count the number of errors.
                 .scan { x: Int?, y: Int? ->
                     Math.addExact(
                         x!!,
@@ -202,8 +201,6 @@ class TestError {
             { x: Long -> println("onNext: $x") },
             { obj: Throwable -> obj.printStackTrace() }
         ) { println("onComplete") }
-
-        assert(disposable != null)
 
     }
 }

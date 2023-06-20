@@ -31,11 +31,11 @@ class TestPowerful {
 
     @Test
     fun testSimple() {
-        val array = "hello test power".split(" ")?.map { it.length }
+        val array = "hello test power".split(" ").map { it.length }
         var sum = 0
         for (num in array) {
-            sum += num
-        }
+                sum += num
+            }
         sum shouldBeEqualTo 14
     }
 
@@ -43,7 +43,7 @@ class TestPowerful {
     fun testAcceptCase() {
         acceptTestCases {
 //            val array = readLine()?.split(" ")?.map { it.toInt() } ?: listOf()
-            val array = "hello test power".split(" ")?.map { it.length }
+            val array = "hello test power".split(" ").map { it.length }
             var sum = 0
             for (num in array) {
                 sum += num

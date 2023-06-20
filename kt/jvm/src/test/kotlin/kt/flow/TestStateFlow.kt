@@ -1,5 +1,7 @@
 package kt.flow
 
+import arrow.core.const
+import kotlinx.coroutines.cancelChildren
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -73,11 +75,12 @@ class TestStateFlow {
             }
         }
 
+        coroutineContext.cancelChildren()
+
         // wait running job
         job.join()
-
         job2.join()
-
         job3.join()
+
     }
 }

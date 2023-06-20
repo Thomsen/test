@@ -6,15 +6,11 @@ import kotlinx.coroutines.channels.ReceiveChannel
 import kotlinx.coroutines.flow.consumeAsFlow
 import kotlinx.coroutines.runBlocking
 
-fun broadcast() {
+suspend fun broadcast() {
+    val broadcastChannel = BroadcastChannel<String>(Channel.BUFFERED)
+    val receiver: ReceiveChannel<String> = broadcastChannel.openSubscription()
 
-    runBlocking {
-        val broadcastChannel = BroadcastChannel<String>(Channel.BUFFERED)
-        val receiver: ReceiveChannel<String> = broadcastChannel.openSubscription()
-
-        receiver.receive()
-        receiver.poll()
-        receiver.consumeAsFlow()
-    }
-
+    receiver.receive()
+    receiver.poll()
+    receiver.consumeAsFlow()
 }

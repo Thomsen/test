@@ -1,6 +1,7 @@
 package kt.parser
 
 import com.google.gson.Gson
+import com.google.gson.JsonSyntaxException
 import com.google.gson.TypeAdapter
 import com.google.gson.TypeAdapterFactory
 import com.google.gson.reflect.TypeToken
@@ -20,14 +21,13 @@ class GsonTypeAdapterFactory : TypeAdapterFactory {
                 adapter.write(out, value)
             }
 
-            @Throws(IOException::class)
+            @Throws(IOException::class, JsonSyntaxException::class)
             override fun read(reader: JsonReader): T? {
                 return try {
                     adapter.read(reader)
                 } catch (e: Throwable) {
                     consumeAll(reader)
-                    e.printStackTrace()
-                    null
+                    throw e
                 }
             }
 

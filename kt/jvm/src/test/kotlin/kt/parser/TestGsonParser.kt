@@ -5,6 +5,7 @@ import com.google.gson.reflect.TypeToken
 import kt.generic.json
 import org.junit.Before
 import org.junit.Test
+import org.junit.jupiter.api.assertThrows
 import kotlin.test.assertEquals
 import kotlin.test.expect
 
@@ -131,16 +132,23 @@ class TestGsonParser {
     fun `test d3`() {
         val sco2Obj = gson.fromJson(sco2Element, Score2::class.java)
         val sco2ObjTree = gsonFac.toJson(sco2Obj)
-        // Expecting number, got: BEGIN_OBJECT
-        val sco3Obj = gsonFac.fromJson<Score2>(sco2ObjTree, object: TypeToken<Score2>(){}.rawType)
+        try {
+            // Expecting number, got: BEGIN_OBJECT
+            val sco3Obj = gsonFac.fromJson<Score2>(sco2ObjTree, object : TypeToken<Score2>() {}.rawType)
+        } catch (e: java.lang.Exception) {
+            throw e
+        }
     }
 
-    @Test(expected = com.google.gson.JsonSyntaxException::class)
+    @Test
     fun `test e`() {
         val sco2Obj = gson.fromJson(sco2Element, Score2::class.java)
         val sco2ObjTree = gsonFac.toJsonTree(sco2Obj)
-        // Expecting number, got: BEGIN_OBJECT
-        val sco3Obj = gsonFac.fromJson(sco2ObjTree, Score2::class.java)
+        val exception = assertThrows<JsonSyntaxException> {
+            // Expecting number, got: BEGIN_OBJECT
+            val sco3Obj = gsonFac.fromJson(sco2ObjTree, Score2::class.java)
+        }
+        assertEquals("Expecting number, got: BEGIN_OBJECT", exception.message)
     }
 
     @Test

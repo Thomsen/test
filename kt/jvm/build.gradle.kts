@@ -19,6 +19,8 @@
 
 //val kotlinVersion: String by extra
 
+val kotlinVersion = "1.8.21"
+
 plugins {
     application
     kotlin("jvm") version "1.8.21"
@@ -76,6 +78,9 @@ dependencies {
     // arrow
     implementation(platform("io.arrow-kt:arrow-stack:1.0.1"))
     implementation("io.arrow-kt:arrow-core")
+
+    // reflect
+    implementation("org.jetbrains.kotlin:kotlin-reflect:$kotlinVersion")
 
     // jol
     implementation("org.openjdk.jol:jol-core:0.16")

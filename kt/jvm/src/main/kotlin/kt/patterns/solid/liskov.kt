@@ -1,6 +1,6 @@
 package kt.patterns.solid
 
-// liskov substitution principle
+// liskov substitution principle (LSP)
 
 abstract class Vehicle0 {
     protected var isEngineWorking = false
@@ -58,6 +58,7 @@ interface Vehicle {
 }
 
 abstract class VehicleWithEngine: Vehicle {
+    // subclasses can replace parent classes without causing errors (lsp)
     private var isEngineWorking = false
     open fun startEngine(){ isEngineWorking = true }
     open fun stopEngine(){ isEngineWorking = false }

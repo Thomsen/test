@@ -1,6 +1,6 @@
 package kt.patterns.solid
 
-// open-closed principle
+// open-closed principle (OCP)
 
 class Rectangle0 (
      var length: Int,

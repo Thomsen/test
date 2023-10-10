@@ -1,6 +1,6 @@
 package kt.patterns.solid
 
-// interface segregation principle
+// interface segregation principle (ISP)
 
 interface Animal0 {
     fun eat()

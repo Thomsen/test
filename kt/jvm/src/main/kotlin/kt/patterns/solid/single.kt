@@ -1,6 +1,6 @@
 package kt.patterns.solid
 
-// single responsibility principle
+// single responsibility principle (SRP)
 
 data class User (
     var id: Long,
@@ -14,6 +14,11 @@ data class User (
 //    fun signOut() {
 //        // this method will do signing out operations
 //    }
+
+//    fun saveUserToDatabase() {
+//        // this method will save user to database
+//    }
+
 }
 
 class AuthenticationService {
@@ -23,5 +28,11 @@ class AuthenticationService {
 
     fun signOut() {
         // this method will do signing out operations
+    }
+}
+
+class UserRepository {
+    fun saveUserToDatabase(user: User) {
+        // repository only for user operation
     }
 }

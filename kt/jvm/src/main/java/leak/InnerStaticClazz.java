@@ -3,6 +3,10 @@ package leak;
 public class InnerStaticClazz {
 
     public static void main(String[] args) {
+        /*
+        result = {InnerStaticClazz$InnerRun@953}
+         Class has no fields
+         */
         new Thread(new InnerRun()).start();
     }
 

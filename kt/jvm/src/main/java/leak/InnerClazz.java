@@ -31,7 +31,7 @@ public class leak.InnerClazz {
        3: dup
        4: new           #3                  // class leak/InnerClazz$1
        7: dup
-       8: invokespecial #4                  // Method leak/InnerClazz$1."<init>":()V 调用了匿名类的构造方法，这样匿名类就持有了外部这个引用
+       8: invokespecial #4                  // Method leak/InnerClazz$1."<init>":()V 调用了匿名类的构造方法，持有了外部引用
       11: invokespecial #5                  // Method java/lang/Thread."<init>":(Ljava/lang/Runnable;)V
       14: invokevirtual #6                  // Method java/lang/Thread.start:()V
       17: return
@@ -44,3 +44,5 @@ public class leak.InnerClazz {
 // dup: 复制栈顶一个字长的数值，并将复制品压入栈顶
 // invokedynamic: 运行时动态解析并绑定方法调用 （反射机制）
 // invokevirtual: 调用实例方法
+
+// 匿名内部类持有外部类引用

@@ -1,11 +1,21 @@
 package kt.flow
 
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.*
+import kotlinx.coroutines.flow.*
 
-fun stateFlow() = runBlocking {
+//fun stateFlow() = runBlocking {
+//
+//}
 
+@OptIn(InternalCoroutinesApi::class)
+fun <T> stateFlow(
+    scope: CoroutineScope,
+    initialValue: T,
+    producer: (subscriptionCount: StateFlow<Int>) -> Flow<T>
+): StateFlow<T> {
+    val state = MutableStateFlow(initialValue)
+    scope.launch {
+        producer(state.subscriptionCount).collect(state)
+    }
+    return state.asStateFlow()
 }

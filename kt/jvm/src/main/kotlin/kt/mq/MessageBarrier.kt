@@ -23,19 +23,35 @@ class MessageQueue {
         val message = queue.peek() ?: return null
         // If there's a barrier and the message is synchronous, skip it
         return if (barrier && !message.isAsync) {
-            var foundMessage: Message? = null
-            for (msg in queue) {
-                if (condition.test(msg)) {
-                    foundMessage = msg
-                    queue.remove(msg)
-                    break
-                }
-            }
-            foundMessage
+            findAsyncMsg()
         } else {
             // If there's no barrier or the message is asynchronous, process it
             queue.take()
         }
+    }
+
+    private fun findAsyncMsg(): Message? {
+        var foundMessage: Message? = null
+        for (msg in queue) {
+            if (condition.test(msg)) {
+                foundMessage = msg
+                break
+            }
+        }
+//        if (!queue.isEmpty()) {
+//            val iterator: Iterator<Message> = queue.iterator()
+//            do {
+//                val currentMessage = iterator.next()
+//                if (condition.test(currentMessage)) {
+//                    foundMessage = currentMessage
+//                    break
+//                }
+//            } while (iterator.hasNext())
+//        }
+        if (foundMessage != null) {
+            queue.remove(foundMessage)
+        }
+        return foundMessage
     }
 
     fun addMessage(message: Message) {

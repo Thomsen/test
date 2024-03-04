@@ -1,5 +1,6 @@
 package kt.mq
 
+import kt.basic.printlnWithTime
 import java.text.SimpleDateFormat
 import java.util.*
 import java.util.concurrent.LinkedBlockingQueue
@@ -74,11 +75,6 @@ class Looper(private val queue: MessageQueue) {
             message.runnable.run()
         }
     }
-}
-
-fun printlnWithTime(message: Any?) {
-    val timeStamp = SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Date())
-    println("[$timeStamp] $message")
 }
 
 

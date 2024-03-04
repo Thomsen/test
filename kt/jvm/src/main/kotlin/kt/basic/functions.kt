@@ -1,5 +1,13 @@
 package kt.basic
 
+import java.text.SimpleDateFormat
+import java.util.*
+
+fun printlnWithTime(message: Any?) {
+    val timeStamp = SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Date())
+    println("[$timeStamp] $message")
+}
+
 fun printFilteredString(list: List<String>, predicate: (String) -> Boolean) {
     list.forEach {
         if (predicate(it)) {

@@ -1,6 +1,6 @@
-package kt.thread.loop
+package kt.mq.loop
 
-import kt.thread.loop.Message.Companion.obtain
+import kt.mq.loop.Message.Companion.obtain
 import java.io.FileDescriptor
 import kotlin.math.max
 import kotlin.math.min

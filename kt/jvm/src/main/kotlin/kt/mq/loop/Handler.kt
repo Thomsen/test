@@ -1,4 +1,4 @@
-package kt.thread.loop
+package kt.mq.loop
 
 import java.lang.reflect.Modifier
 

@@ -1,4 +1,4 @@
-package kt.thread.loop
+package kt.mq.loop
 
 class Message
 /** Constructor (but the preferred way to get a Message is to call [Message.obtain()][.obtain]).

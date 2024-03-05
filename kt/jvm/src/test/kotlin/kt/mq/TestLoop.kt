@@ -1,9 +1,9 @@
-package kt.thread
+package kt.mq
 
 import kt.basic.printlnWithTime
-import kt.thread.loop.Handler
-import kt.thread.loop.Looper
-import kt.thread.loop.Message
+import kt.mq.loop.Handler
+import kt.mq.loop.Looper
+import kt.mq.loop.Message
 import kotlin.test.Test
 
 class TestLoop {

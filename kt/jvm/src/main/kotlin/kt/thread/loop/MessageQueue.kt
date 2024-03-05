@@ -9,7 +9,8 @@ class MessageQueue internal constructor(// True if the message queue can be quit
     private val mQuitAllowed: Boolean
 ) {
 
-    var mMessages: Message? = null
+    private var mMessages: Message? = null
+
     private var mQuitting = false
 
     // Indicates whether next() is blocked waiting in pollOnce() with a non-zero timeout.
@@ -18,9 +19,6 @@ class MessageQueue internal constructor(// True if the message queue can be quit
     // The next barrier token.
     // Barriers are indicated by messages with a null target whose arg1 field carries the token.
     private var mNextBarrierToken = 0
-
-    private external fun nativePollOnce(ptr: Long, timeoutMillis: Int) /*non-static for callbacks*/
-
 
     @Throws(Throwable::class)
     protected fun finalize() {
@@ -47,7 +45,7 @@ class MessageQueue internal constructor(// True if the message queue can be quit
         get() {
             synchronized(this) {
                 val now = System.currentTimeMillis()
-                return mMessages == null || now < mMessages!!.`when`
+                return mMessages == null || now < mMessages!!.time
             }
         }
 
@@ -78,9 +76,6 @@ class MessageQueue internal constructor(// True if the message queue can be quit
 
 
     fun next(): Message? {
-        // Return here if the message loop has already quit and been disposed.
-        // This can happen if the application tries to restart a looper after quit
-        // which is not supported.
 
         var nextPollTimeoutMillis = 0
         while (true) {
@@ -98,9 +93,9 @@ class MessageQueue internal constructor(// True if the message queue can be quit
                     } while (msg != null && !msg.isAsynchronous)
                 }
                 if (msg != null) {
-                    if (now < msg.`when`) {
+                    if (now < msg.time) {
                         // Next message is not ready.  Set a timeout to wake up when it is ready.
-                        nextPollTimeoutMillis = min((msg.`when` - now).toInt(), Int.MAX_VALUE) as Int
+                        nextPollTimeoutMillis = min((msg.time - now).toInt(), Int.MAX_VALUE) as Int
                     } else {
                         // Got a message.
                         mBlocked = false
@@ -177,20 +172,20 @@ class MessageQueue internal constructor(// True if the message queue can be quit
         return postSyncBarrier(System.currentTimeMillis())
     }
 
-    private fun postSyncBarrier(`when`: Long): Int {
+    private fun postSyncBarrier(time: Long): Int {
         // Enqueue a new sync barrier token.
         // We don't need to wake the queue because the purpose of a barrier is to stall it.
         synchronized(this) {
             val token = mNextBarrierToken++
             val msg = obtain()
             msg!!.markInUse()
-            msg.`when` = `when`
+            msg.time = time
             msg.arg1 = token
 
             var prev: Message? = null
             var p = mMessages
-            if (`when` != 0L) {
-                while (p != null && p.`when` <= `when`) {
+            if (time != 0L) {
+                while (p != null && p.time <= time) {
                     prev = p
                     p = p.next
                 }
@@ -243,7 +238,7 @@ class MessageQueue internal constructor(// True if the message queue can be quit
         }
     }
 
-    fun enqueueMessage(msg: Message, `when`: Long): Boolean {
+    fun enqueueMessage(msg: Message, time: Long): Boolean {
         requireNotNull(msg.target) { "Message must have a target." }
 
         synchronized(this) {
@@ -257,10 +252,10 @@ class MessageQueue internal constructor(// True if the message queue can be quit
             }
 
             msg.markInUse()
-            msg.`when` = `when`
+            msg.time = time
             var p = mMessages
             var needWake: Boolean
-            if (p == null || `when` == 0L || `when` < p.`when`) {
+            if (p == null || time == 0L || time < p.time) {
                 // New head, wake up the event queue if blocked.
                 msg.next = p
                 mMessages = msg
@@ -274,7 +269,7 @@ class MessageQueue internal constructor(// True if the message queue can be quit
                 while (true) {
                     prev = p
                     p = p!!.next
-                    if (p == null || `when` < p.`when`) {
+                    if (p == null || time < p.time) {
                         break
                     }
                     if (needWake && p.isAsynchronous) {
@@ -558,7 +553,7 @@ class MessageQueue internal constructor(// True if the message queue can be quit
         val now = System.currentTimeMillis()
         var p = mMessages
         if (p != null) {
-            if (p.`when` > now) {
+            if (p.time > now) {
                 removeAllMessagesLocked()
             } else {
                 var n: Message?
@@ -567,7 +562,7 @@ class MessageQueue internal constructor(// True if the message queue can be quit
                     if (n == null) {
                         return
                     }
-                    if (n.`when` > now) {
+                    if (n.time > now) {
                         break
                     }
                     p = n

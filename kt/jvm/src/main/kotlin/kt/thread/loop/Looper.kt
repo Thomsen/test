@@ -14,6 +14,7 @@ class Looper private constructor(quitAllowed: Boolean) {
      * @return The looper's thread.
      */
     val thread: Thread = Thread.currentThread()
+
     private var mInLoop = false
 
     private val mTraceTag: Long = 0
@@ -132,14 +133,14 @@ class Looper private constructor(quitAllowed: Boolean) {
 
     companion object {
         /*
-     * API Implementation Note:
-     *
-     * This class contains the code required to set up and manage an event loop
-     * based on MessageQueue.  APIs that affect the state of the queue should be
-     * defined on MessageQueue or Handler rather than on Looper itself.  For example,
-     * idle handlers and sync barriers are defined on the queue whereas preparing the
-     * thread, looping, and quitting are defined on the looper.
-     */
+         * API Implementation Note:
+         *
+         * This class contains the code required to set up and manage an event loop
+         * based on MessageQueue.  APIs that affect the state of the queue should be
+         * defined on MessageQueue or Handler rather than on Looper itself.  For example,
+         * idle handlers and sync barriers are defined on the queue whereas preparing the
+         * thread, looping, and quitting are defined on the looper.
+         */
         private const val TAG = "Looper"
 
         // sThreadLocal.get() will return null unless you've called prepare().
@@ -164,22 +165,6 @@ class Looper private constructor(quitAllowed: Boolean) {
             sThreadLocal.set(Looper(quitAllowed))
         }
 
-        /**
-         * Initialize the current thread as a looper, marking it as an
-         * application's main looper. See also: [.prepare]
-         *
-         */
-        @Deprecated(
-            """The main looper for your application is created by the Android environment,
-        so you should never need to call this function yourself."""
-        )
-        fun prepareMainLooper() {
-            prepare(false)
-            synchronized(Looper::class.java) {
-                check(sMainLooper == null) { "The main Looper has already been prepared." }
-                sMainLooper = myLooper()
-            }
-        }
 
         val mainLooper: Looper?
             /**

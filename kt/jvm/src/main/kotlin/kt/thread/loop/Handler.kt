@@ -33,72 +33,6 @@ open class Handler {
         }
     }
 
-    /**
-     * Default constructor associates this handler with the [Looper] for the
-     * current thread.
-     *
-     * If this thread does not have a looper, this handler won't be able to receive messages
-     * so an exception is thrown.
-     *
-     */
-    @Deprecated(
-        """Implicitly choosing a Looper during Handler construction can lead to bugs
-        where operations are silently lost (if the Handler is not expecting new tasks and quits),
-        crashes (if a handler is sometimes created on a thread without a Looper active), or race
-        conditions, where the thread a handler is associated with is not what the author
-        anticipated. Instead, use an {@link java.util.concurrent.Executor} or specify the Looper
-        explicitly, using {@link Looper#getMainLooper}, {link android.view.View#getHandler}, or
-        similar. If the implicit thread local behavior is required for compatibility, use
-        {@code new Handler(Looper.myLooper())} to make it clear to readers."""
-    )
-    constructor() : this(null, false)
-
-    /**
-     * Constructor associates this handler with the [Looper] for the
-     * current thread and takes a callback interface in which you can handle
-     * messages.
-     *
-     * If this thread does not have a looper, this handler won't be able to receive messages
-     * so an exception is thrown.
-     *
-     * @param callback The callback interface in which to handle messages, or null.
-     *
-     */
-    @Deprecated(
-        """Implicitly choosing a Looper during Handler construction can lead to bugs
-        where operations are silently lost (if the Handler is not expecting new tasks and quits),
-        crashes (if a handler is sometimes created on a thread without a Looper active), or race
-        conditions, where the thread a handler is associated with is not what the author
-        anticipated. Instead, use an {@link java.util.concurrent.Executor} or specify the Looper
-        explicitly, using {@link Looper#getMainLooper}, {link android.view.View#getHandler}, or
-        similar. If the implicit thread local behavior is required for compatibility, use
-        {@code new Handler(Looper.myLooper(), callback)} to make it clear to readers."""
-    )
-    constructor(callback: Callback?) : this(callback, false)
-
-    constructor(async: Boolean) : this(null, async)
-
-
-    constructor(callback: Callback?, async: Boolean) {
-        if (FIND_POTENTIAL_LEAKS) {
-            val klass: Class<out Handler> = javaClass
-            if ((klass.isAnonymousClass || klass.isMemberClass || klass.isLocalClass) &&
-                (klass.modifiers and Modifier.STATIC) == 0
-            ) {
-            }
-        }
-
-        looper = Looper.myLooper()
-        if (looper == null) {
-            throw RuntimeException(
-                "Can't create handler inside thread " + Thread.currentThread()
-                        + " that has not called Looper.prepare()"
-            )
-        }
-        mQueue = looper.queue
-        mCallback = callback
-        mAsynchronous = async
-    }
 
     /**
      * Use the provided [Looper] instead of the default one and take a callback
@@ -249,8 +183,6 @@ open class Handler {
         return sendMessageDelayed(getPostMessage(r), delayMillis)
     }
 
-    /** @hide
-     */
     fun postDelayed(r: Runnable, what: Int, delayMillis: Long): Boolean {
         return sendMessageDelayed(getPostMessage(r).setWhat(what), delayMillis)
     }
@@ -629,12 +561,6 @@ open class Handler {
     }
 
     companion object {
-        /*
-     * Set this flag to true to detect anonymous, local or member classes
-     * that extend this Handler class and that are not static. These kind
-     * of classes can potentially create leaks.
-     */
-        private const val FIND_POTENTIAL_LEAKS = false
         private const val TAG = "Handler"
         private var MAIN_THREAD_HANDLER: Handler? = null
 

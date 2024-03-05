@@ -26,7 +26,7 @@ class Message
      * Return the targeted delivery time of this message, in milliseconds.
      */
     @kotlin.jvm.JvmField
-    var `when`: Long = 0
+    var time: Long = 0
 
     /*package*/
     @kotlin.jvm.JvmField
@@ -84,7 +84,7 @@ class Message
         obj = null
         sendingUid = UID_NONE
         workSourceUid = UID_NONE
-        `when` = 0
+        time = 0
         target = null
         callback = null
 

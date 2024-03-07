@@ -68,7 +68,7 @@ class MessageQueue {
     }
 }
 
-class Looper(private val queue: MessageQueue) {
+private class Looper(private val queue: MessageQueue) {
     fun loop() {
         while (true) {
             val message = queue.next() ?: continue

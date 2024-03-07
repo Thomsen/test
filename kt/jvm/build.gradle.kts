@@ -120,6 +120,10 @@ dependencies {
     jmh("org.openjdk.jmh:jmh-core:1.25")
     jmh("org.openjdk.jmh:jmh-generator-annprocess:1.25")
 
+    testImplementation("org.mockito:mockito-core:5.11.0")
+//    testImplementation("org.mockito.kotlin:mockito-kotlin:5.3.0")
+
+
 }
 
 // $ gradle wrapper --gradle-version 6.4.1

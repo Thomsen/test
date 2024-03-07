@@ -33,31 +33,6 @@ open class Handler {
         }
     }
 
-
-    /**
-     * Use the provided [Looper] instead of the default one and take a callback
-     * interface in which to handle messages.  Also set whether the handler
-     * should be asynchronous.
-     *
-     * Handlers are synchronous by default unless this constructor is used to make
-     * one that is strictly asynchronous.
-     *
-     * Asynchronous messages represent interrupts or events that do not require global ordering
-     * with respect to synchronous messages.  Asynchronous messages are not subject to
-     * the synchronization barriers introduced by conditions such as display vsync.
-     *
-     * @param looper The looper, must not be null.
-     * @param callback The callback interface in which to handle messages, or null.
-     * @param async If true, the handler calls [Message.setAsynchronous] for
-     * each [Message] that is sent to it or [Runnable] that is posted to it.
-     *
-     * @hide
-     */
-    /**
-     * Use the provided [Looper] instead of the default one.
-     *
-     * @param looper The looper, must not be null.
-     */
     /**
      * Use the provided [Looper] instead of the default one and take a callback
      * interface in which to handle messages.
@@ -73,17 +48,6 @@ open class Handler {
         mAsynchronous = async
     }
 
-    /** {@hide}  */
-    fun getTraceName(message: Message): String {
-        val sb = StringBuilder()
-        sb.append(javaClass.name).append(": ")
-        if (message.callback != null) {
-            sb.append(message.callback!!.javaClass.name)
-        } else {
-            sb.append("#").append(message.what)
-        }
-        return sb.toString()
-    }
 
     /**
      * Returns a string representing the name of the specified message.
@@ -419,8 +383,8 @@ open class Handler {
      * 'object' that are in the message queue.  If <var>object</var> is null,
      * all messages will be removed.
      */
-    fun removeMessages(what: Int, `object`: Any?) {
-        mQueue.removeMessages(this, what, `object`)
+    fun removeMessages(what: Int, any: Any?) {
+        mQueue.removeMessages(this, what, any)
     }
 
     /**
@@ -435,8 +399,8 @@ open class Handler {
      *
      * @hide
      */
-    fun removeEqualMessages(what: Int, `object`: Any?) {
-        mQueue.removeEqualMessages(this, what, `object`)
+    fun removeEqualMessages(what: Int, any: Any?) {
+        mQueue.removeEqualMessages(this, what, any)
     }
 
     /**
@@ -479,8 +443,8 @@ open class Handler {
      * Check if there are any pending posts of messages with code 'what' and
      * whose obj is 'object' in the message queue.
      */
-    fun hasMessages(what: Int, `object`: Any?): Boolean {
-        return mQueue.hasMessages(this, what, `object`)
+    fun hasMessages(what: Int, any: Any?): Boolean {
+        return mQueue.hasMessages(this, what, any)
     }
 
     /**
@@ -489,8 +453,8 @@ open class Handler {
      *
      * @hide
      */
-    fun hasEqualMessages(what: Int, `object`: Any?): Boolean {
-        return mQueue.hasEqualMessages(this, what, `object`)
+    fun hasEqualMessages(what: Int, any: Any?): Boolean {
+        return mQueue.hasEqualMessages(this, what, any)
     }
 
     /**

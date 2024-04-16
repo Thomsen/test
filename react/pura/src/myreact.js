@@ -35,3 +35,7 @@ const deepCompare = (arr1, arr2) => {
 
 export default useMemo;
 
+
+export const useAdd = (factory, deps) => {
+    return useMemo(() => factory(), deps);
+};

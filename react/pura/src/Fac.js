@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
-import useMemo from './myreact';
+import useMem from './myreact'; // is the export default
+import { useAdd } from "./myreact"; // {} match
 
 const FactorialCalculator = () => {
     const [number, setNumber] = useState(5);
 
-    const factorial = useMemo(() => {
+    const factorial = useMem(() => {
         console.log('calculating factorial...');
         let result = 1;
         for (let i = 1; i <= number; i++) {

@@ -1,10 +1,11 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState } from 'react';
+import useMemo from './myreact';
 
 const FactorialCalculator = () => {
     const [number, setNumber] = useState(5);
 
     const factorial = useMemo(() => {
-        console.log('Calculating factorial...');
+        console.log('calculating factorial...');
         let result = 1;
         for (let i = 1; i <= number; i++) {
             result *= i;
@@ -26,3 +27,4 @@ const FactorialCalculator = () => {
 };
 
 export default FactorialCalculator;
+

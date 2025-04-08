@@ -37,7 +37,7 @@ apply {
 tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
     kotlinOptions {
         // 'compileTestJava' task (current target is 11) and 'compileTestKotlin' task (current target is 1.8)
-        jvmTarget = "11"
+        jvmTarget = "17"
         // context receivers
         freeCompilerArgs = listOf("-Xcontext-receivers")
 
